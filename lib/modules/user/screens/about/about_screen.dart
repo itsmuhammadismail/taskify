@@ -3,10 +3,10 @@ import 'package:taskify/shared/layout/widgets/layout.dart';
 
 part 'widgets/body.dart';
 
-class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
 
-  static String id = "account_screen";
+  static String id = "about_screen";
 
   @override
   Widget build(BuildContext context) {

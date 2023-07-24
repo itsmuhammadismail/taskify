@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/modules/user/screens/about/about_screen.dart';
+import 'package:taskify/modules/user/screens/help_and_support/help_and_support_screen.dart';
+import 'package:taskify/modules/user/screens/notification/notification_screen.dart';
 import 'package:taskify/shared/layout/widgets/layout.dart';
 import 'package:taskify/modules/user/screens/account/account_screen.dart';
 

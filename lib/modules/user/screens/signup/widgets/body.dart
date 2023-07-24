@@ -61,57 +61,59 @@ class Body extends HookWidget {
         width: size.width,
         height: size.height,
         child: SafeArea(
-          child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 40),
-                  const Text(
-                    "Sign-up",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 40),
+                    const Text(
+                      "Sign-up",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Divider(color: Colors.black),
-                  const SizedBox(height: 30),
-                  AuthTextField(
-                      controller: _firstNameController,
-                      label: "First Name",
-                      hintText: 'Type your name'),
-                  const SizedBox(height: 20),
-                  AuthTextField(
-                      controller: _lastNameController,
-                      label: "Last Name",
-                      hintText: 'Type your last name'),
-                  const SizedBox(height: 20),
-                  AuthTextField(
-                      controller: _emailController,
-                      label: "Email",
-                      hintText: 'Type your email'),
-                  const SizedBox(height: 20),
-                  AuthTextField(
-                    controller: _passwordController,
-                    label: "New password",
-                    hintText: 'Type your new password',
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 20),
-                  AuthTextField(
-                    controller: _confirmPasswordController,
-                    label: "Confirm new password",
-                    hintText: 'Re-type your password',
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 40),
-                  Button(
-                      child: const Text("Submit"),
-                      onPressed: () => _onSubmit()),
-                  const SizedBox(height: 20),
-                ],
-              )),
+                    const SizedBox(height: 20),
+                    const Divider(color: Colors.black),
+                    const SizedBox(height: 30),
+                    AuthTextField(
+                        controller: _firstNameController,
+                        label: "First Name",
+                        hintText: 'Type your name'),
+                    const SizedBox(height: 20),
+                    AuthTextField(
+                        controller: _lastNameController,
+                        label: "Last Name",
+                        hintText: 'Type your last name'),
+                    const SizedBox(height: 20),
+                    AuthTextField(
+                        controller: _emailController,
+                        label: "Email",
+                        hintText: 'Type your email'),
+                    const SizedBox(height: 20),
+                    AuthTextField(
+                      controller: _passwordController,
+                      label: "New password",
+                      hintText: 'Type your new password',
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 20),
+                    AuthTextField(
+                      controller: _confirmPasswordController,
+                      label: "Confirm new password",
+                      hintText: 'Re-type your password',
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 40),
+                    Button(
+                        child: const Text("Submit"),
+                        onPressed: () => _onSubmit()),
+                    const SizedBox(height: 20),
+                  ],
+                )),
+          ),
         ),
       ),
     );

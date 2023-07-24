@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/modules/tasks/screens/add_task/add_task_screen.dart';
+import 'package:taskify/modules/tasks/screens/stats/stats_screen.dart';
 import 'package:taskify/modules/user/screens/edit_profile/edit_profile_screen.dart';
+import 'package:taskify/modules/user/screens/history/history_screen.dart';
 import 'package:taskify/modules/user/screens/login/login_screen.dart';
 import 'package:taskify/modules/user/screens/settings/settings_screen.dart';
 import 'package:taskify/modules/user/screens/show_details/show_details_screen.dart';
@@ -85,7 +88,7 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               PopupMenuItem(
-                onTap: () {},
+                value: HistoyScreen.id,
                 child: const Row(
                   children: [
                     Icon(Icons.restore, color: Colors.black54),
@@ -97,7 +100,7 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               PopupMenuItem(
-                onTap: () {},
+                value: StatsScreen.id,
                 child: const Row(
                   children: [
                     Icon(Icons.query_stats, color: Colors.black54),
@@ -109,7 +112,7 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               PopupMenuItem(
-                onTap: () {},
+                value: AddTaskScreen.id,
                 child: const Row(
                   children: [
                     Icon(Icons.add_circle, color: Colors.black54),
