@@ -1,4 +1,4 @@
-part of '../settings_screen.dart';
+part of '../privacy_and_security_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             const Text(
-              "Settings",
+              "Privacy And Security",
               style: TextStyle(
                 color: Color(0xFFDA6FCF),
                 fontSize: 30,
@@ -23,10 +23,10 @@ class Body extends StatelessWidget {
             Material(
               elevation: 2,
               child: ListTile(
-                onTap: () => Navigator.pushNamed(context, AccountScreen.id),
+                onTap: () =>
+                    Navigator.pushNamed(context, ShowPasswordScreen.id),
                 tileColor: Colors.grey.shade200,
-                title: const Text("Account"),
-                leading: Icon(Icons.perm_identity),
+                title: const Text("Show Password"),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
@@ -35,21 +35,9 @@ class Body extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: () =>
-                    Navigator.pushNamed(context, PrivacyAndSecurityScreen.id),
+                    Navigator.pushNamed(context, ManageAccountsScreen.id),
                 tileColor: Colors.grey.shade200,
-                title: const Text("Privacy & Security"),
-                leading: Icon(Icons.lock),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Material(
-              elevation: 2,
-              child: ListTile(
-                onTap: () => Navigator.pushNamed(context, ApearanceScreen.id),
-                tileColor: Colors.grey.shade200,
-                title: const Text("Appearance"),
-                leading: Icon(Icons.visibility),
+                title: const Text("Manage Accounts"),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
@@ -58,10 +46,19 @@ class Body extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: () =>
-                    Navigator.pushNamed(context, HelpAndSupportScreen.id),
+                    Navigator.pushNamed(context, ManageHistoryScreen.id),
                 tileColor: Colors.grey.shade200,
-                title: const Text("Help & Support"),
-                leading: Icon(Icons.support_agent),
+                title: const Text("Manage History"),
+                trailing: Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Material(
+              elevation: 2,
+              child: ListTile(
+                onTap: () => Navigator.pushNamed(context, UpdatesScreen.id),
+                tileColor: Colors.grey.shade200,
+                title: const Text("Updates"),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
@@ -70,10 +67,9 @@ class Body extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: () =>
-                    Navigator.pushNamed(context, NotificationScreen.id),
+                    Navigator.pushNamed(context, PrivacyPolicyScreen.id),
                 tileColor: Colors.grey.shade200,
-                title: const Text("Notifications"),
-                leading: Icon(Icons.notifications_active),
+                title: const Text("Privacy"),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
@@ -81,10 +77,9 @@ class Body extends StatelessWidget {
             Material(
               elevation: 2,
               child: ListTile(
-                onTap: () => Navigator.pushNamed(context, AboutScreen.id),
+                onTap: () => Navigator.pushNamed(context, AppSecurityScreen.id),
                 tileColor: Colors.grey.shade200,
-                title: const Text("About"),
-                leading: Icon(Icons.help),
+                title: const Text("App Security"),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),

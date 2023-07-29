@@ -48,11 +48,11 @@ class _BodyState extends State<Body> {
                   child: InkWell(
                     onTap: () => _selectDate(context),
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(30),
                         ),
                       ),
@@ -74,33 +74,78 @@ class _BodyState extends State<Body> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
+                  child: PopupMenuButton(
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Row(
+                          children: [
+                            Image.asset('assets/icons/status_high.png'),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text("High"),
+                            )
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Image.asset(
+                                'assets/icons/status_medium.png',
+                                height: 23,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text("Medium"),
+                            )
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: [
+                            Image.asset('assets/icons/status_low.png'),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text("Low"),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/icons/status_medium.png',
+                            width: 20,
+                            height: 33,
+                          ),
+                          const SizedBox(width: 10),
+                          const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Status"),
+                              Text("Medium"),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/icons/status_medium.png',
-                          width: 20,
-                          height: 33,
-                        ),
-                        SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Status"),
-                            Text("Medium"),
-                          ],
-                        )
-                      ],
-                    ),
                   ),
-                )
+                ),
               ],
             ),
             const SizedBox(height: 30),
@@ -131,27 +176,27 @@ class CreatedTask extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20),
-        Text(
+        const SizedBox(height: 20),
+        const Text(
           "Pending",
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Container(
-          padding: EdgeInsets.all(15),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(15),
+          decoration: const BoxDecoration(
               color: Color(0xFFD9D9D9),
               borderRadius: BorderRadius.all(Radius.circular(12))),
           child: Row(
             children: [
-              Text(
+              const Text(
                 "YouTube tutorial",
                 style: TextStyle(fontSize: 16),
               ),
-              Spacer(),
+              const Spacer(),
               Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
@@ -159,10 +204,10 @@ class CreatedTask extends StatelessWidget {
                 ),
                 child: const Text("26 May"),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Container(
-                padding: EdgeInsets.all(7),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(7),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),

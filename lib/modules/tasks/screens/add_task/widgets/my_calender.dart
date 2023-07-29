@@ -17,7 +17,7 @@ class _MyCalenderState extends State<MyCalender> {
     Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: size.height - 260,
+      height: size.height - 170,
       child: SfCalendar(
         view: CalendarView.schedule,
         dataSource: MeetingDataSource(_getDataSource()),
