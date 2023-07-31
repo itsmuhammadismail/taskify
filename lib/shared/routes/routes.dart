@@ -5,6 +5,7 @@ import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
 import 'package:taskify/modules/tasks/screens/stats/stats_screen.dart';
 import 'package:taskify/modules/user/screens/about/about_screen.dart';
 import 'package:taskify/modules/user/screens/account/account_screen.dart';
+import 'package:taskify/modules/user/screens/add_account/add_account_screen.dart';
 import 'package:taskify/modules/user/screens/app_security/app_security_screen.dart';
 import 'package:taskify/modules/user/screens/appearance/appearance_screen.dart';
 import 'package:taskify/modules/user/screens/edit_profile/edit_profile_screen.dart';
@@ -17,6 +18,7 @@ import 'package:taskify/modules/user/screens/manage_history/manage_history_scree
 import 'package:taskify/modules/user/screens/notification/notification_screen.dart';
 import 'package:taskify/modules/user/screens/privacy_and_security/privacy_and_security_screen.dart';
 import 'package:taskify/modules/user/screens/privacy_policy/privacy_policy_screen.dart';
+import 'package:taskify/modules/user/screens/remove_account/remove_account_screen.dart';
 import 'package:taskify/modules/user/screens/save_info/save_info_screen.dart';
 import 'package:taskify/modules/user/screens/settings/settings_screen.dart';
 import 'package:taskify/modules/user/screens/show_details/show_details_screen.dart';
@@ -52,5 +54,7 @@ class Routes {
     PrivacyPolicyScreen.id: (context) => const PrivacyPolicyScreen(),
     AppSecurityScreen.id: (context) => const AppSecurityScreen(),
     SaveInfoScreen.id: (context) => const SaveInfoScreen(),
+    RemoveAccountScreen.id: (context) => const RemoveAccountScreen(),
+    AddAccountScreen.id: (context) => const AddAccountScreen(),
   };
 }

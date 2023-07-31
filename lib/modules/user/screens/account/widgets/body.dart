@@ -63,7 +63,22 @@ class Body extends StatelessWidget {
               leading: const Text("Gender"),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 30),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              child: Text("Add another Account"),
+              onPressed: () => Navigate.to(context, AddAccountScreen.id),
+            ),
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              child: Text("Remove an Account"),
+              onPressed: () => Navigate.to(context, RemoveAccountScreen.id),
+            ),
+          ),
         ],
       ),
     );
