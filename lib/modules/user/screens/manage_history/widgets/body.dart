@@ -19,6 +19,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final themeChange = Provider.of<DarkThemeProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -48,7 +49,9 @@ class _BodyState extends State<Body> {
                           Text(
                             "Logistic company branding",
                             style: TextStyle(
-                              color: Color(0xFF0821A1),
+                              color: themeChange.darkTheme
+                                  ? Colors.white
+                                  : Color(0xFF0821A1),
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                             ),
@@ -57,7 +60,9 @@ class _BodyState extends State<Body> {
                           Text(
                             "YouTube Tutorial",
                             style: TextStyle(
-                              color: Color(0xFF0821A1),
+                              color: themeChange.darkTheme
+                                  ? Colors.white
+                                  : Color(0xFF0821A1),
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                             ),
@@ -66,7 +71,9 @@ class _BodyState extends State<Body> {
                           Text(
                             "Create identity",
                             style: TextStyle(
-                              color: Color(0xFF0821A1),
+                              color: themeChange.darkTheme
+                                  ? Colors.white
+                                  : Color(0xFF0821A1),
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                             ),
@@ -75,7 +82,9 @@ class _BodyState extends State<Body> {
                           Text(
                             "Briefing with South Korea ",
                             style: TextStyle(
-                              color: Color(0xFF0821A1),
+                              color: themeChange.darkTheme
+                                  ? Colors.white
+                                  : Color(0xFF0821A1),
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                             ),
@@ -84,7 +93,9 @@ class _BodyState extends State<Body> {
                           Text(
                             "Medical Landing page",
                             style: TextStyle(
-                              color: Color(0xFF0821A1),
+                              color: themeChange.darkTheme
+                                  ? Colors.white
+                                  : Color(0xFF0821A1),
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                             ),

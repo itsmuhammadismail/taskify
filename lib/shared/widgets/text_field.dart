@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:taskify/resources/colors.dart';
+import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 
 class MyTextField extends StatefulWidget {
   final String hintText;
@@ -39,6 +41,7 @@ class _MyTextFieldState extends State<MyTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return TextFormField(
       controller: widget.controller,
       enabled: true,
@@ -56,7 +59,7 @@ class _MyTextFieldState extends State<MyTextField> {
           : null,
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: themeChange.darkTheme ? Colors.black : Colors.white,
         hintText: widget.hintText,
         hintStyle: const TextStyle(
           color: Color(0xFFB4B4B4),

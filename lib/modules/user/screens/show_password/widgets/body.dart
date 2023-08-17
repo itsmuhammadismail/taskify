@@ -42,7 +42,6 @@ class _BodyState extends State<Body> {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: Text(show ? "Mahnoor57" : "● ● ● ● ●"),
               leading: const Text("Password:"),
               trailing: GestureDetector(

@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 
 class ViewTask extends StatelessWidget {
   const ViewTask({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
+
     return Column(
       children: [
-        const Row(
+        Row(
           children: [
             Text(
               "Current task",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF161616),
+                color: themeChange.darkTheme ? Colors.white : Color(0xFF161616),
               ),
             ),
             Spacer(),

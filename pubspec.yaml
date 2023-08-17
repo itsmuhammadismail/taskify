@@ -39,6 +39,8 @@ dependencies:
   fl_chart: ^0.63.0
   syncfusion_flutter_calendar: ^22.1.39
   horizontal_calendar: ^1.1.2
+  shared_preferences: ^2.2.0
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,6 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("Mahnoor"),
               leading: const Text("Name"),
             ),
@@ -31,7 +30,6 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("mahnoor@gmail.com"),
               leading: const Text("Email"),
             ),
@@ -40,7 +38,6 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("● ● ● ● ●"),
               leading: const Text("Password"),
             ),
@@ -49,7 +46,6 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("12 20 2000"),
               leading: const Text("Date of Birth"),
             ),
@@ -58,7 +54,6 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("Female"),
               leading: const Text("Gender"),
             ),

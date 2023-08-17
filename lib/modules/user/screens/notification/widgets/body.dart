@@ -35,7 +35,6 @@ class _BodyState extends State<Body> {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("Notifications"),
               leading: Icon(Icons.notifications_active),
               trailing: Switch(

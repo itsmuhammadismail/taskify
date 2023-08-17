@@ -39,7 +39,6 @@ class _BodyState extends State<Body> {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: TextField(
                   decoration: InputDecoration(
                 hintText: "Search for an issue",

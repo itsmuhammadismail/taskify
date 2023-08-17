@@ -24,7 +24,6 @@ class Body extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: () => Navigator.pushNamed(context, AccountScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("Account"),
                 leading: Icon(Icons.perm_identity),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -36,7 +35,6 @@ class Body extends StatelessWidget {
               child: ListTile(
                 onTap: () =>
                     Navigator.pushNamed(context, PrivacyAndSecurityScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("Privacy & Security"),
                 leading: Icon(Icons.lock),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -47,7 +45,6 @@ class Body extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: () => Navigator.pushNamed(context, ApearanceScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("Appearance"),
                 leading: Icon(Icons.visibility),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -59,7 +56,6 @@ class Body extends StatelessWidget {
               child: ListTile(
                 onTap: () =>
                     Navigator.pushNamed(context, HelpAndSupportScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("Help & Support"),
                 leading: Icon(Icons.support_agent),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -71,7 +67,6 @@ class Body extends StatelessWidget {
               child: ListTile(
                 onTap: () =>
                     Navigator.pushNamed(context, NotificationScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("Notifications"),
                 leading: Icon(Icons.notifications_active),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -82,7 +77,6 @@ class Body extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: () => Navigator.pushNamed(context, AboutScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("About"),
                 leading: Icon(Icons.help),
                 trailing: Icon(Icons.arrow_forward_ios),

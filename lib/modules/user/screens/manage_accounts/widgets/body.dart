@@ -41,7 +41,6 @@ class _BodyState extends State<Body> {
               elevation: 2,
               child: ListTile(
                 onTap: () => Navigator.pushNamed(context, AccountScreen.id),
-                tileColor: Colors.grey.shade200,
                 title: const Text("Mahnoor"),
                 leading: Image.asset('assets/images/avatar.png'),
               ),

@@ -173,6 +173,8 @@ class CreatedTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -184,8 +186,10 @@ class CreatedTask extends StatelessWidget {
         const SizedBox(height: 5),
         Container(
           padding: const EdgeInsets.all(15),
-          decoration: const BoxDecoration(
-              color: Color(0xFFD9D9D9),
+          decoration: BoxDecoration(
+              color: themeChange.darkTheme
+                  ? Colors.grey.shade800
+                  : Color(0xFFD9D9D9),
               borderRadius: BorderRadius.all(Radius.circular(12))),
           child: Row(
             children: [
@@ -196,8 +200,10 @@ class CreatedTask extends StatelessWidget {
               const Spacer(),
               Container(
                 padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: themeChange.darkTheme
+                      ? Colors.grey.shade500
+                      : Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
@@ -207,8 +213,10 @@ class CreatedTask extends StatelessWidget {
               const SizedBox(width: 10),
               Container(
                 padding: const EdgeInsets.all(7),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: themeChange.darkTheme
+                      ? Colors.grey.shade500
+                      : Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),

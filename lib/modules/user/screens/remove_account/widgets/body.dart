@@ -22,7 +22,6 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("Mahnoor"),
               leading: Image.asset('assets/images/avatar.png'),
               trailing: Image.asset('assets/icons/delete.png'),

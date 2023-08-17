@@ -8,16 +8,16 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  bool isSwitched = false;
-
-  void toggleSwitch(bool value) {
-    setState(() {
-      isSwitched = !isSwitched;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
+
+    void toggleSwitch(bool value) {
+      setState(() {
+        themeChange.darkTheme = value;
+      });
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -35,12 +35,11 @@ class _BodyState extends State<Body> {
           Material(
             elevation: 2,
             child: ListTile(
-              tileColor: Colors.grey.shade200,
               title: const Text("Dark Mode"),
               leading: Icon(Icons.dark_mode),
               trailing: Switch(
                 onChanged: toggleSwitch,
-                value: isSwitched,
+                value: themeChange.darkTheme,
                 activeColor: const Color(0xFFDA6FCF),
               ),
             ),
