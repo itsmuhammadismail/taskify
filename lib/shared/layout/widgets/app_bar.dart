@@ -60,7 +60,15 @@ class _BuildAppBarState extends State<BuildAppBar> {
       ),
       backgroundColor: themeChange.darkTheme ? Colors.black : Colors.white,
       elevation: 0,
-      title: Image.asset('assets/logos/taskify-text.png'),
+      title: themeChange.darkTheme
+          ? Image.asset(
+              'assets/logos/logo-dark.png',
+              width: 75,
+            )
+          : Image.asset(
+              'assets/logos/taskify-text.png',
+              width: 75,
+            ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 10),

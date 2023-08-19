@@ -7,6 +7,7 @@ class Body extends HookWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final themeChange = Provider.of<DarkThemeProvider>(context);
 
     final _firstNameController = TextEditingController();
     final _lastNameController = TextEditingController();
@@ -48,15 +49,20 @@ class Body extends HookWidget {
 
     return SingleChildScrollView(
       child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFFCBAACB),
-              Colors.white,
-            ],
-          ),
+        decoration: BoxDecoration(
+          gradient: !themeChange.darkTheme
+              ? const LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color(0xFFCBAACB),
+                    Colors.white,
+                  ],
+                )
+              : null,
+          color: themeChange.darkTheme
+              ? const Color.fromARGB(255, 49, 49, 49)
+              : null,
         ),
         width: size.width,
         height: size.height,
