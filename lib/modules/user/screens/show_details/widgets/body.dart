@@ -5,6 +5,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = Auth().currentUser;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -24,13 +26,13 @@ class Body extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: "Mahnoor",
+              initialValue: user?.displayName?.split(" ")[0] ?? '',
               readOnly: true,
               decoration: const InputDecoration(label: Text("First Name")),
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: "Mansoor",
+              initialValue: user?.displayName?.split(" ")[1] ?? '',
               readOnly: true,
               decoration: const InputDecoration(label: Text("Last Name")),
             ),
@@ -66,7 +68,7 @@ class Body extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: "mahnoor20@gmail.com",
+              initialValue: user?.email,
               readOnly: true,
               decoration: const InputDecoration(label: Text("Email")),
             ),

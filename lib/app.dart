@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:taskify/firebase_options.dart';
 import 'package:taskify/modules/user/screens/splash/splash_screen.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 import 'package:taskify/shared/routes/routes.dart';

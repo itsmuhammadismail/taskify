@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:taskify/auth.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({
@@ -14,8 +16,8 @@ class HeroSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Text(
-                  "Hi Mahnoor",
+                Text(
+                  "Hi ${Auth().currentUser?.displayName?.split(" ")[0]}",
                   style: TextStyle(
                     color: Color(0xFFDA6FCF),
                     fontSize: 30,

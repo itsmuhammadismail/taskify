@@ -9,6 +9,8 @@ class Body extends HookWidget {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final themeChange = Provider.of<DarkThemeProvider>(context);
 
+    final loading = useState<bool>(false);
+
     final _firstNameController = TextEditingController();
     final _lastNameController = TextEditingController();
     final _emailController = TextEditingController();
@@ -25,23 +27,41 @@ class Body extends HookWidget {
             _emailController.text != '' &&
             _passwordController.text != '' &&
             _confirmPasswordController.text != '') {
-          // if (_passwordController.text != _confirmPasswordController.text) {
-          //   _emailController.clear();
-          //   _passwordController.clear();
-          //   _confirmPasswordController.clear();
-          //   showDialog(
-          //     context: context,
-          //     builder: (BuildContext context) {
-          //       return const Alert(
-          //         type: AlertType.failed,
-          //         heading: 'Password change failed',
-          //         body: 'Password and Confirm password not matched',
-          //       );
-          //     },
-          //   );
-          // } else {
-          Navigate.next(context, HomeScreen.id);
-          // }
+          if (_passwordController.text != _confirmPasswordController.text) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const Alert(
+                  type: AlertType.failed,
+                  heading: 'Error',
+                  body: 'Password and Confirm password not matched',
+                );
+              },
+            );
+          } else {
+            loading.value = true;
+            try {
+              await Auth().createUserWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text,
+                displayName:
+                    _firstNameController.text + " " + _lastNameController.text,
+              );
+              Navigate.next(context, HomeScreen.id);
+            } on FirebaseAuthException catch (e) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Alert(
+                    type: AlertType.failed,
+                    heading: 'Signup Failed!',
+                    body: e.message ?? '',
+                  );
+                },
+              );
+            }
+            loading.value = false;
+          }
           form.save();
         }
       } else {}
@@ -114,7 +134,11 @@ class Body extends HookWidget {
                     ),
                     const SizedBox(height: 40),
                     Button(
-                        child: const Text("Submit"),
+                        child: loading.value == true
+                            ? CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text("Submit"),
                         onPressed: () => _onSubmit()),
                     const SizedBox(height: 20),
                   ],

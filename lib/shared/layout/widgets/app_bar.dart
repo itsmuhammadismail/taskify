@@ -42,7 +42,7 @@ class _BuildAppBarState extends State<BuildAppBar> {
                 content: const Text('Are you sure you want to log out?'),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    onPressed: () => Navigator.pop(context),
                     child: const Text('Cancel'),
                   ),
                   TextButton(

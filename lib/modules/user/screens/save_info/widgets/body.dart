@@ -12,10 +12,11 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    void setSaveInfo(bool save) {
+    void setSaveInfo(bool save) async {
       setState(() {
         saveInfo = save;
       });
+      await Auth().signOut();
       Timer(const Duration(seconds: 2),
           () => Navigate.to(context, LoginScreen.id));
     }

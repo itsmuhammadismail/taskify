@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/auth.dart';
 import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
 import 'package:taskify/modules/user/screens/about/about_screen.dart';
 import 'package:taskify/modules/user/screens/app_security/app_security_screen.dart';

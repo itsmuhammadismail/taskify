@@ -8,6 +8,8 @@ class Body extends HookWidget {
     Size size = MediaQuery.of(context).size;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+    final loading = useState<bool>(false);
+
     final _emailController = TextEditingController();
     final _passwordController = TextEditingController();
 
@@ -17,23 +19,27 @@ class Body extends HookWidget {
       if (form!.validate()) {
         FocusManager.instance.primaryFocus?.unfocus();
         if (_emailController.text != '' && _passwordController.text != '') {
-          if (_emailController.text != 'mahnoor@gmail.com' &&
-              _passwordController.text != 'admin123') {
-            _emailController.clear();
-            _passwordController.clear();
+          loading.value = true;
+          try {
+            await Auth().signinWithEmailAndPassword(
+              email: _emailController.text,
+              password: _passwordController.text,
+            );
+            Navigate.next(context, HomeScreen.id);
+          } on FirebaseAuthException catch (e) {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return const Alert(
+                return Alert(
                   type: AlertType.failed,
                   heading: 'Login Failed!',
-                  body: 'Email or password is incorrect',
+                  body: e.message ?? '',
                 );
               },
             );
-          } else {
-            Navigate.next(context, HomeScreen.id);
           }
+          loading.value = false;
+
           form.save();
         }
       } else {}
@@ -79,7 +85,11 @@ class Body extends HookWidget {
                   ),
                   const SizedBox(height: 20),
                   Button(
-                    child: const Text("Login"),
+                    child: loading.value == true
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text("Login"),
                     onPressed: () => _onSubmit(),
                   ),
                   const SizedBox(height: 20),
@@ -111,5 +121,3 @@ class Body extends HookWidget {
     );
   }
 }
-
-

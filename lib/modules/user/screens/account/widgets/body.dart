@@ -5,6 +5,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = Auth().currentUser;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -22,7 +24,7 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              title: const Text("Mahnoor"),
+              title: Text(user?.displayName?.split(" ")[0] ?? ''),
               leading: const Text("Name"),
             ),
           ),
@@ -30,7 +32,7 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              title: const Text("mahnoor@gmail.com"),
+              title: Text(user?.email ?? ''),
               leading: const Text("Email"),
             ),
           ),

@@ -41,7 +41,8 @@ class _BodyState extends State<Body> {
               elevation: 2,
               child: ListTile(
                 onTap: () => Navigator.pushNamed(context, AccountScreen.id),
-                title: const Text("Mahnoor"),
+                title:
+                    Text(Auth().currentUser?.displayName?.split(" ")[0] ?? ''),
                 leading: Image.asset('assets/images/avatar.png'),
               ),
             ),
