@@ -7,6 +7,8 @@ import 'package:taskify/modules/user/screens/splash/splash_screen.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 import 'package:taskify/shared/routes/routes.dart';
 import 'package:taskify/shared/theme/theme_data.dart';
+import 'package:taskify/shared/provider/user_provider.dart';
+
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -37,10 +39,11 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
     ]);
 
-    return ChangeNotifierProvider(
-      create: (_) {
-        return themeChangeProvider;
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => themeChangeProvider),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
       child: Consumer<DarkThemeProvider>(
         builder: (context, value, child) {
           return MaterialApp(

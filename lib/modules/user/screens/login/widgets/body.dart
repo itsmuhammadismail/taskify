@@ -25,6 +25,12 @@ class Body extends HookWidget {
               email: _emailController.text,
               password: _passwordController.text,
             );
+
+             var res = await NetworkHelper.request(
+                url: '/users?email=${_emailController.text}',
+                method: 'GET',
+              );
+
             Navigate.next(context, HomeScreen.id);
           } on FirebaseAuthException catch (e) {
             showDialog(
