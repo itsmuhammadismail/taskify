@@ -9,6 +9,7 @@ import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
 import 'package:taskify/shared/routes/navigate.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:taskify/shared/network/network.dart';
 
 part 'widgets/body.dart';
 

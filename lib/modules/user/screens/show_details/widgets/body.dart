@@ -5,7 +5,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var user = Auth().currentUser;
+    var user = Provider.of<UserProvider>(context).user;
 
     return SingleChildScrollView(
       child: Padding(
@@ -26,66 +26,48 @@ class Body extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: user?.displayName?.split(" ")[0] ?? '',
+              initialValue: user.first_name ?? '',
               readOnly: true,
               decoration: const InputDecoration(label: Text("First Name")),
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: user?.displayName?.split(" ")[1] ?? '',
+              initialValue: user.last_name ?? '',
               readOnly: true,
               decoration: const InputDecoration(label: Text("Last Name")),
             ),
             const SizedBox(height: 15),
             DateSelector(name: "Date of Birth", onChange: () {}),
             const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: DropdownButton<String>(
-                value: "Female",
-                onChanged: (String? value) {},
-                items: ["Male", "Female"]
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
+            TextFormField(
+              initialValue: user.gender ?? '',
+              readOnly: true,
+              decoration: const InputDecoration(label: Text("Gender")),
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: "Sir Syed University",
+              initialValue: user.university ?? '',
               readOnly: true,
               decoration:
                   const InputDecoration(label: Text("School/University")),
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: "0315 6578001",
+              initialValue: user.mobile ?? '',
               readOnly: true,
               decoration: const InputDecoration(label: Text("Mobile No")),
             ),
             const SizedBox(height: 10),
             TextFormField(
-              initialValue: user?.email,
+              initialValue: user.email ?? '',
               readOnly: true,
               decoration: const InputDecoration(label: Text("Email")),
             ),
             const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: DropdownButton<String>(
-                value: "Pakistan",
-                onChanged: (String? value) {},
-                items: ["Pakistan", "India"]
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
+            TextFormField(
+              initialValue: user.country ?? '',
+              readOnly: true,
+              decoration: const InputDecoration(label: Text("Country")),
             ),
             const SizedBox(height: 10),
             SizedBox(

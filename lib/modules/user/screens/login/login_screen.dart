@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taskify/auth.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 import 'package:taskify/shared/widgets/aut_text_field.dart';
 import 'package:taskify/shared/widgets/button.dart';
 import 'package:taskify/shared/widgets/text_field_container.dart';
@@ -10,6 +12,7 @@ import 'package:taskify/modules/user/screens/forget_password/forget_password_scr
 import 'package:taskify/modules/user/screens/signup/signup_screen.dart';
 import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:taskify/shared/network/network.dart';
 
 part 'widgets/body.dart';
 

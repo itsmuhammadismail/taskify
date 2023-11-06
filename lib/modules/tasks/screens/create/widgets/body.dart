@@ -1,5 +1,15 @@
 part of "../create_screen.dart";
 
+class Task {
+  String id, desc, due_date, status;
+
+  Task(
+      {required this.id,
+      required this.desc,
+      required this.due_date,
+      required this.status});
+}
+
 class Body extends StatefulWidget {
   const Body({super.key});
 
@@ -9,6 +19,10 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   DateTime selectedDate = DateTime.now();
+  String status = "Medium";
+  String desc = "";
+  bool isLoading = false;
+  List<Task> tasks = [];
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -23,8 +37,66 @@ class _BodyState extends State<Body> {
     }
   }
 
+  void getTasks(String id) async {
+    var res = await NetworkHelper.request(
+      url: '/tasks?id=$id',
+      method: 'GET',
+    );
+
+    print("get tasks");
+    print(res);
+    setState(() {
+      tasks = res
+          .map<Task>((task) => Task(
+              id: task['id'],
+              desc: task['desc'],
+              due_date: task['due_date'],
+              status: task['status']))
+          .toList();
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    // Add listeners to this class
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      var id = Provider.of<UserProvider>(context, listen: false).user.id;
+      getTasks(id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    UserInterface user = Provider.of<UserProvider>(context).user;
+
+    void addTask() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      try {
+        var res = await NetworkHelper.request(
+          url: '/tasks/',
+          method: 'POST',
+          data: {
+            "desc": desc.toString(),
+            "due_date": selectedDate.toIso8601String(),
+            "status": status.toLowerCase(),
+            "user": user.id.toString()
+          },
+        );
+      } catch (e) {
+        print(e.toString());
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+
+      getTasks(user.id.toString());
+    }
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -40,7 +112,11 @@ class _BodyState extends State<Body> {
               ),
             ),
             const SizedBox(height: 20),
-            MyTextField(hintText: "Add task descriprion", onChange: (e) {}),
+            MyTextField(
+                hintText: "Add task descriprion",
+                onChange: (e) {
+                  desc = e.toString();
+                }),
             const SizedBox(height: 10),
             Row(
               children: [
@@ -64,7 +140,8 @@ class _BodyState extends State<Body> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Due Date"),
-                              Text("27 May"),
+                              Text(
+                                  "${selectedDate.day} ${kMonths[selectedDate.month - 1]}"),
                             ],
                           )
                         ],
@@ -77,6 +154,11 @@ class _BodyState extends State<Body> {
                   child: PopupMenuButton(
                     itemBuilder: (context) => [
                       PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            status = "High";
+                          });
+                        },
                         child: Row(
                           children: [
                             Image.asset('assets/icons/status_high.png'),
@@ -88,6 +170,11 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            status = "Medium";
+                          });
+                        },
                         child: Row(
                           children: [
                             Padding(
@@ -106,6 +193,11 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            status = "Low";
+                          });
+                        },
                         child: Row(
                           children: [
                             Image.asset('assets/icons/status_low.png'),
@@ -129,16 +221,16 @@ class _BodyState extends State<Body> {
                       child: Row(
                         children: [
                           Image.asset(
-                            'assets/icons/status_medium.png',
+                            'assets/icons/status_${status.toLowerCase()}.png',
                             width: 20,
                             height: 33,
                           ),
                           const SizedBox(width: 10),
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Status"),
-                              Text("Medium"),
+                              const Text("Status"),
+                              Text(status),
                             ],
                           )
                         ],
@@ -147,6 +239,15 @@ class _BodyState extends State<Body> {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: Button(
+                onPressed: () => addTask(),
+                child:
+                    isLoading ? CircularProgressIndicator() : Text('Add Task'),
+              ),
             ),
             const SizedBox(height: 30),
             const Text(
@@ -157,10 +258,13 @@ class _BodyState extends State<Body> {
                 color: Color(0xFFDA6FCF),
               ),
             ),
-            CreatedTask(),
-            CreatedTask(),
-            CreatedTask(),
-            CreatedTask(),
+            ...tasks
+                .map((task) => CreatedTask(
+                      desc: task.desc,
+                      due_date: task.due_date,
+                      status: task.status,
+                    ))
+                .toList(),
           ],
         ),
       ),
@@ -169,7 +273,13 @@ class _BodyState extends State<Body> {
 }
 
 class CreatedTask extends StatelessWidget {
-  const CreatedTask({super.key});
+  final String desc, due_date, status;
+
+  const CreatedTask(
+      {super.key,
+      required this.desc,
+      required this.due_date,
+      required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -193,8 +303,8 @@ class CreatedTask extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(12))),
           child: Row(
             children: [
-              const Text(
-                "YouTube tutorial",
+              Text(
+                desc,
                 style: TextStyle(fontSize: 16),
               ),
               const Spacer(),
@@ -208,10 +318,12 @@ class CreatedTask extends StatelessWidget {
                     Radius.circular(30),
                   ),
                 ),
-                child: const Text("26 May"),
+                child: Text(
+                    "${DateTime.parse(due_date).day} ${kMonths[DateTime.parse(due_date).month - 1]}"),
               ),
               const SizedBox(width: 10),
               Container(
+                width: 30,
                 padding: const EdgeInsets.all(7),
                 decoration: BoxDecoration(
                   color: themeChange.darkTheme
@@ -221,7 +333,10 @@ class CreatedTask extends StatelessWidget {
                     Radius.circular(30),
                   ),
                 ),
-                child: Image.asset('assets/icons/status_high.png'),
+                child: Image.asset(
+                  'assets/icons/status_$status.png',
+                  height: 20,
+                ),
               )
             ],
           ),

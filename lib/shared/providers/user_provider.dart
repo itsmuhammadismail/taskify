@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
 class UserInterface {
-  final String id, first_name, last_name, email, dob, gender, university, mobile, country;
+  String id,
+      first_name,
+      last_name,
+      email,
+      dob,
+      gender,
+      university,
+      mobile,
+      country;
 
-  const UserInterface({
+  UserInterface({
     required this.id,
     required this.first_name,
     required this.last_name,
@@ -17,23 +25,20 @@ class UserInterface {
 }
 
 class UserProvider with ChangeNotifier {
-  DarkThemePreference darkThemePreference = DarkThemePreference();
-  bool _darkTheme = false;
   UserInterface _user = UserInterface(
-    id: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    dob: '',
-    gender: '',
-    university: '',
-    mobile: '',
-    country: ''
-  )
+      id: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      dob: '',
+      gender: '',
+      university: '',
+      mobile: '',
+      country: '');
 
-  bool get user => _user;
+  UserInterface get user => _user;
 
-  set user(User newUser) {
+  set user(UserInterface newUser) {
     _user.id = newUser.id;
     _user.first_name = newUser.first_name;
     _user.last_name = newUser.last_name;
@@ -43,6 +48,7 @@ class UserProvider with ChangeNotifier {
     _user.university = newUser.university;
     _user.mobile = newUser.mobile;
     _user.country = newUser.country;
+    print(_user);
     notifyListeners();
   }
 }

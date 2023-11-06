@@ -10,14 +10,20 @@ class NetworkHelper {
     String method = 'GET',
   }) async {
     Map<String, String> headers = {};
-    headers['Authorization'] = 'Bearer $token';
+
     if (method != 'GET') {
       headers['Content-Type'] = 'application/json';
     }
+
     var request = http.Request(method, Uri.parse('$kHost$url'));
     request.body = jsonEncode(data);
+    print('$kHost$url');
+    print(headers);
+    print(request.body);
     request.headers.addAll(headers);
+
     http.StreamedResponse response = await request.send();
+    print(response.statusCode);
 
     var res = await response.stream.bytesToString().then((value) {
       return jsonDecode(value);

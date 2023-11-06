@@ -11,24 +11,25 @@ class _BodyState extends State<Body> {
   var uuid = const Uuid();
   var messageController = TextEditingController();
 
-  void chatComplete() async {
-    String text = messageController.text == Null ? '' : messageController.text;
+  String id = '1';
 
-    final chat = await client.chat.create(
-      model: 'gpt-3.5-turbo',
-      messages: const [
-        // ChatMessage(
-        //   role: 'user',
-        //   content: text,
-        // )
-      ],
-    ).data;
-
-    print(chat);
-  }
+  List<MessageModel> mymessages = [
+    // MessageModel(
+    //   text: 'hahehus',
+    //   messageid: uuid.v1(),
+    //   sender: '1',
+    //   createdon: DateTime.now(),
+    // ),
+    // MessageModel(
+    //   text: 'hahehus',
+    //   messageid: uuid.v1(),
+    //   sender: '2',
+    //   createdon: DateTime.now(),
+    // ),
+  ];
 
   static final configuration = OpenAIConfiguration(
-    apiKey: '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',
+    apiKey: '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',
   );
 
   final client = OpenAIClient(
@@ -37,32 +38,56 @@ class _BodyState extends State<Body> {
   );
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    chatComplete();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
 
-    String id = '1';
+    void chatComplete() async {
+      if (messageController.text != '') {
+        String text = messageController.text;
 
-    List<MessageModel> mymessages = [
-      MessageModel(
-        text: 'hahehus',
-        messageid: uuid.v1(),
-        sender: '1',
-        createdon: DateTime.now(),
-      ),
-      MessageModel(
-        text: 'hahehus',
-        messageid: uuid.v1(),
-        sender: '2',
-        createdon: DateTime.now(),
-      ),
-    ];
+        setState(() {
+          mymessages.insert(
+              0,
+              MessageModel(
+                text: text,
+                messageid: uuid.v1(),
+                sender: '2',
+                createdon: DateTime.now(),
+              ));
+        });
+        setState(() {
+          mymessages.insert(
+              0,
+              MessageModel(
+                text: "• • •",
+                messageid: uuid.v1(),
+                sender: '1',
+                createdon: DateTime.now(),
+              ));
+        });
+
+        final chat = await client.chat.create(
+          model: 'gpt-3.5-turbo',
+          messages: [
+            ChatMessage(
+              role: 'user',
+              content: text,
+            )
+          ],
+        ).data;
+
+        setState(() {
+          mymessages[0] = MessageModel(
+            text: chat.choices[0].message.content,
+            messageid: uuid.v1(),
+            sender: '1',
+            createdon: DateTime.now(),
+          );
+        });
+
+        print(chat.choices[0].message.content);
+      }
+    }
 
     return SafeArea(
         child: Container(
@@ -81,6 +106,8 @@ class _BodyState extends State<Body> {
                           : MainAxisAlignment.start,
                       children: [
                         Container(
+                            constraints:
+                                BoxConstraints(minWidth: 100, maxWidth: 300),
                             margin: EdgeInsets.symmetric(
                               vertical: 2,
                             ),
@@ -121,6 +148,7 @@ class _BodyState extends State<Body> {
                 IconButton(
                   onPressed: () {
                     // sendMessage();
+                    chatComplete();
                   },
                   icon: Icon(
                     Icons.send,
