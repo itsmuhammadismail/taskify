@@ -47,6 +47,23 @@ class Body extends HookWidget {
                 displayName:
                     _firstNameController.text + " " + _lastNameController.text,
               );
+              
+               var res = await NetworkHelper.request(
+                url: '/users',
+                method: 'POST',
+                data: {
+                  "first_name":  _firstNameController.text,
+                  "last_name": _lastNameController.text,
+                  "email": _lastNameController.text,
+                  "password": _passwordController.text,
+                  "dob": "2023-11-06",
+                  "gender": "",
+                  "university": "",
+                  "mobile": "",
+                  "country": ""
+                },
+              );
+
               Navigate.next(context, HomeScreen.id);
             } on FirebaseAuthException catch (e) {
               showDialog(
