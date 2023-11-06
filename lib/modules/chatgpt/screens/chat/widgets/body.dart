@@ -29,7 +29,7 @@ class _BodyState extends State<Body> {
   ];
 
   static final configuration = OpenAIConfiguration(
-    apiKey: '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',
+    apiKey: dotenv.env['OPEN_AI_KEY'] ?? '',
   );
 
   final client = OpenAIClient(
@@ -44,6 +44,8 @@ class _BodyState extends State<Body> {
     void chatComplete() async {
       if (messageController.text != '') {
         String text = messageController.text;
+
+        messageController.text = '';
 
         setState(() {
           mymessages.insert(

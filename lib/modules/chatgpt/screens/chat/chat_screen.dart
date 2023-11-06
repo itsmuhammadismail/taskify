@@ -7,6 +7,7 @@ import 'package:taskify/shared/layout/widgets/layout.dart';
 import 'package:uuid/uuid.dart';
 import 'package:openai_client/openai_client.dart';
 import 'package:openai_client/src/model/openai_chat/chat_message.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 part 'widgets/body.dart';
 
