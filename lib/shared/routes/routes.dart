@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/modules/chatgpt/screens/chat/chat_screen.dart';
 import 'package:taskify/modules/tasks/screens/add_task/add_task_screen.dart';
 import 'package:taskify/modules/tasks/screens/create/create_screen.dart';
 import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
@@ -56,5 +57,6 @@ class Routes {
     SaveInfoScreen.id: (context) => const SaveInfoScreen(),
     RemoveAccountScreen.id: (context) => const RemoveAccountScreen(),
     AddAccountScreen.id: (context) => const AddAccountScreen(),
+    ChatScreen.id: (context) => const ChatScreen(),
   };
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/modules/chatgpt/screens/chat/chat_screen.dart';
+import 'package:taskify/shared/routes/navigate.dart';
 
 class ChatGPT extends StatelessWidget {
   const ChatGPT({
@@ -20,17 +22,20 @@ class ChatGPT extends StatelessWidget {
           ],
         ),
       ),
-      child: Row(
-        children: [
-          Image.asset('assets/icons/search.png'),
-          const SizedBox(width: 10),
-          const Text(
-            "Search with Chatgpt",
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-          const Spacer(),
-          Image.asset('assets/icons/equalizer.png'),
-        ],
+      child: InkWell(
+        onTap: () => Navigate.to(context, ChatScreen.id),
+        child: Row(
+          children: [
+            Image.asset('assets/icons/search.png'),
+            const SizedBox(width: 10),
+            const Text(
+              "Search with Chatgpt",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const Spacer(),
+            Image.asset('assets/icons/equalizer.png'),
+          ],
+        ),
       ),
     );
   }
