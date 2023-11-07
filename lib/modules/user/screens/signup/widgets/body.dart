@@ -8,6 +8,7 @@ class Body extends HookWidget {
     Size size = MediaQuery.of(context).size;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final themeChange = Provider.of<DarkThemeProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
 
     final loading = useState<bool>(false);
 
@@ -47,14 +48,14 @@ class Body extends HookWidget {
                 displayName:
                     _firstNameController.text + " " + _lastNameController.text,
               );
-              
-               var res = await NetworkHelper.request(
-                url: '/users',
+
+              var res = await NetworkHelper.request(
+                url: '/users/',
                 method: 'POST',
                 data: {
-                  "first_name":  _firstNameController.text,
+                  "first_name": _firstNameController.text,
                   "last_name": _lastNameController.text,
-                  "email": _lastNameController.text,
+                  "email": _emailController.text,
                   "password": _passwordController.text,
                   "dob": "2023-11-06",
                   "gender": "",
@@ -63,6 +64,17 @@ class Body extends HookWidget {
                   "country": ""
                 },
               );
+
+              userProvider.user = UserInterface(
+                id: res['id'],
+                first_name: res['first_name'],
+                last_name: res['last_name'],
+                email: res['email'],
+                dob: res['dob'],
+                gender: res['gender'],
+                university: res['university'],
+                mobile: res['mobile'],
+                country: res['country']);
 
               Navigate.next(context, HomeScreen.id);
             } on FirebaseAuthException catch (e) {

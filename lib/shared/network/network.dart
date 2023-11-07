@@ -32,6 +32,7 @@ class NetworkHelper {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return res;
     } else {
+      print(res);
       throw Exception(res['message']);
     }
   }

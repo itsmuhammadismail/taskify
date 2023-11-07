@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taskify/auth.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 import 'package:taskify/shared/widgets/alert.dart';
 import 'package:taskify/shared/widgets/aut_text_field.dart';
 import 'package:taskify/shared/widgets/button.dart';
