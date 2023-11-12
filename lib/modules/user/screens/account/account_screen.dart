@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taskify/auth.dart';
+import 'package:taskify/main.dart';
 import 'package:taskify/modules/user/screens/add_account/add_account_screen.dart';
 import 'package:taskify/modules/user/screens/remove_account/remove_account_screen.dart';
 import 'package:taskify/shared/layout/widgets/layout.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 import 'package:taskify/shared/routes/navigate.dart';
 
 part 'widgets/body.dart';

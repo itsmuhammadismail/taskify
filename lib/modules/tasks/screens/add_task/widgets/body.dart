@@ -5,6 +5,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime date = DateTime.now();
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -22,7 +23,7 @@ class Body extends StatelessWidget {
                       color: Color(0xFFDA6FCF),
                     ),
                   ),
-                  Text("June 10, 2021"),
+                  Text("${kMonths[date.month - 1]} ${date.day}, ${date.year}"),
                 ],
               ),
               Spacer(),

@@ -1,7 +1,9 @@
 part of '../show_details_screen.dart';
 
 class Body extends StatelessWidget {
-  const Body({super.key});
+  Body({super.key});
+
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,12 @@ class Body extends StatelessWidget {
               decoration: const InputDecoration(label: Text("Last Name")),
             ),
             const SizedBox(height: 15),
-            DateSelector(name: "Date of Birth", onChange: () {}),
+            DateSelector(
+              name: "Date of Birth",
+              onChange: () {},
+              selectedDate:
+                  user.dob == '' ? selectedDate : DateTime.parse(user.dob),
+            ),
             const SizedBox(height: 10),
             TextFormField(
               initialValue: user.gender ?? '',

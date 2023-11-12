@@ -15,7 +15,7 @@ class ShowDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Layout(
+    return Layout(
       body: Body(),
     );
   }

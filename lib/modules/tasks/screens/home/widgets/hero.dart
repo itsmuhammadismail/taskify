@@ -1,14 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:taskify/auth.dart';
+import 'package:taskify/shared/network/network.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 
-class HeroSection extends StatelessWidget {
+class HeroSection extends StatefulWidget {
   const HeroSection({
     super.key,
   });
 
   @override
+  State<HeroSection> createState() => _HeroSectionState();
+}
+
+class _HeroSectionState extends State<HeroSection> {
+  int tasks = 0;
+
+  void getHistory() async {
+    String id = context.read<UserProvider>().user.id;
+    try {
+      var res = await NetworkHelper.request(
+        url: '/tasks_history/?id=$id',
+      );
+
+      setState(() {
+        tasks = res.length;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getHistory();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String name = Provider.of<UserProvider>(context).user.first_name;
+
     return Row(
       children: [
         Column(
@@ -17,7 +50,7 @@ class HeroSection extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Hi ${Auth().currentUser?.displayName?.split(" ")[0]}",
+                  "Hi $name",
                   style: TextStyle(
                     color: Color(0xFFDA6FCF),
                     fontSize: 30,
@@ -28,9 +61,9 @@ class HeroSection extends StatelessWidget {
                 Image.asset('assets/emojis/hand.png')
               ],
             ),
-            const Text(
-              "You have scheduled 5 tasks",
-              style: TextStyle(color: Color(0xFF3B96EA)),
+            Text(
+              "You have scheduled $tasks tasks",
+              style: const TextStyle(color: Color(0xFF3B96EA)),
             ),
           ],
         ),

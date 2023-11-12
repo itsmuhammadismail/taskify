@@ -25,6 +25,8 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    String password = context.watch<UserProvider>().user.password;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -42,7 +44,7 @@ class _BodyState extends State<Body> {
           Material(
             elevation: 2,
             child: ListTile(
-              title: Text(show ? "Mahnoor57" : "● ● ● ● ●"),
+              title: Text(show ? (password) : "● ● ● ● ●"),
               leading: const Text("Password:"),
               trailing: GestureDetector(
                 onTap: toggleShow,

@@ -6,7 +6,6 @@ import 'package:taskify/modules/tasks/screens/home/widgets/task_completed_card.d
 import 'package:taskify/modules/tasks/screens/home/widgets/notification_card.dart';
 import 'package:taskify/modules/tasks/screens/home/widgets/task.dart';
 
-
 part 'widgets/body.dart';
 
 class HomeScreen extends StatelessWidget {

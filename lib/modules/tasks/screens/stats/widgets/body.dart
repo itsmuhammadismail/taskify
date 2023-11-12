@@ -33,7 +33,7 @@ class Body extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
-                "YouTube tutorial",
+                "No tasks",
                 style: TextStyle(
                     fontSize: 31,
                     fontWeight: FontWeight.w600,
@@ -74,7 +74,7 @@ class Body extends StatelessWidget {
                           color: Color(0xFF9A5E9A),
                         ),
                         child: const Text(
-                          "Leave like",
+                          "",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -93,7 +93,7 @@ class Body extends StatelessWidget {
                           color: Color(0xFF69B9F6),
                         ),
                         child: const Text(
-                          "Watch every three days",
+                          "",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

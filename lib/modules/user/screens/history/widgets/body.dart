@@ -1,17 +1,55 @@
 part of '../history_screen.dart';
 
-class Body extends StatelessWidget {
+class DoneTaskInterface {
+  final String desc, startDate, endDate;
+
+  DoneTaskInterface(this.desc, this.startDate, this.endDate);
+}
+
+class Body extends StatefulWidget {
   const Body({super.key});
 
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+
+  List<DoneTaskInterface> tasks = [];
+
+  void getHistory() async {
+    String id = context.read<UserProvider>().user.id;
+    try {
+      var res = await NetworkHelper.request(
+        url: '/tasks_history/?id=$id',
+      );
+
+      List<DoneTaskInterface> data = [];
+      res.forEach((item) {
+        if (item['end_time'] != null) {
+          print(item);
+          data.add(DoneTaskInterface(
+              item['task_desc'], item['start_time'], item['end_time']));
+        }
+      });
+      print(data);
+
+      setState(() {
+        tasks = data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getHistory();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var text = [
-      "Submission of assignment",
-      "Attending Cloud Lecture",
-      "Installing a software",
-      "Quiz preparation",
-      "Youtube video related to Quiz"
-    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -38,11 +76,13 @@ class Body extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          HistoryCard(text: text[0]),
-          HistoryCard(text: text[1]),
-          HistoryCard(text: text[2]),
-          HistoryCard(text: text[3]),
-          HistoryCard(text: text[4]),
+          ...tasks
+              .map((task) => HistoryCard(
+                    text: task.desc,
+                    startTime: task.startDate,
+                    endTime: task.endDate,
+                  ))
+              .toList(),
         ],
       ),
     );
@@ -53,13 +93,18 @@ class HistoryCard extends StatelessWidget {
   const HistoryCard({
     super.key,
     required this.text,
+    required this.startTime,
+    required this.endTime,
   });
 
-  final String text;
+  final String text, startTime, endTime;
 
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
+
+    DateTime start = DateTime.parse(startTime);
+    DateTime end = DateTime.parse(endTime);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +124,7 @@ class HistoryCard extends StatelessWidget {
                       : Color(0xFFD9D9D9),
                   borderRadius: BorderRadius.all(Radius.circular(40))),
               child: Text(
-                "Start Date: 21/May/2023",
+                "Start Date: ${start.day}/${kMonths[start.month - 1]}/${start.year}",
                 style: TextStyle(fontSize: 11),
               ),
             ),
@@ -92,7 +137,7 @@ class HistoryCard extends StatelessWidget {
                       : Color(0xFFD9D9D9),
                   borderRadius: BorderRadius.all(Radius.circular(40))),
               child: Text(
-                "End Date: 22/May/2023",
+                "End Date: ${end.day}/${kMonths[end.month - 1]}/${end.year}",
                 style: TextStyle(fontSize: 11),
               ),
             )

@@ -1,7 +1,9 @@
 part of '../add_account_screen.dart';
 
 class Body extends StatelessWidget {
-  const Body({super.key});
+  Body({super.key});
+
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,12 @@ class Body extends StatelessWidget {
               decoration: InputDecoration(hintText: "Last Name"),
             ),
             const SizedBox(height: 15),
-            DateSelector(name: "Date of Birth", onChange: () {}),
+            DateSelector(
+                name: "Date of Birth",
+                onChange: (DateTime date) {
+                  selectedDate = date;
+                },
+                selectedDate: selectedDate),
             const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,

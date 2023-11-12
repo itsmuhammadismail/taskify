@@ -66,15 +66,16 @@ class Body extends HookWidget {
               );
 
               userProvider.user = UserInterface(
-                id: res['id'],
-                first_name: res['first_name'],
-                last_name: res['last_name'],
-                email: res['email'],
-                dob: res['dob'],
-                gender: res['gender'],
-                university: res['university'],
-                mobile: res['mobile'],
-                country: res['country']);
+                  id: res['id'],
+                  first_name: res['first_name'],
+                  last_name: res['last_name'],
+                  email: res['email'],
+                  dob: res['dob'],
+                  gender: res['gender'],
+                  university: res['university'],
+                  mobile: res['mobile'],
+                  country: res['country'],
+                  password: res['password']);
 
               Navigate.next(context, HomeScreen.id);
             } on FirebaseAuthException catch (e) {

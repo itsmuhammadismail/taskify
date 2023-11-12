@@ -16,7 +16,11 @@ class _BodyState extends State<Body> {
       setState(() {
         saveInfo = save;
       });
-      await Auth().signOut();
+      try {
+        await Auth().signOut();
+      } catch (e) {}
+      Provider.of<UserProvider>(context, listen: false).clearUser();
+
       Timer(const Duration(seconds: 2),
           () => Navigate.to(context, LoginScreen.id));
     }

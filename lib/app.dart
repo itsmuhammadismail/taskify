@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:taskify/firebase_options.dart';
 import 'package:taskify/modules/user/screens/splash/splash_screen.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
+import 'package:taskify/shared/providers/chat_provider.dart';
 import 'package:taskify/shared/providers/user_provider.dart';
 import 'package:taskify/shared/routes/routes.dart';
 import 'package:taskify/shared/theme/theme_data.dart';
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => themeChangeProvider),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
       child: Consumer<DarkThemeProvider>(
         builder: (context, value, child) {

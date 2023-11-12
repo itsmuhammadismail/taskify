@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class DateSelector extends StatefulWidget {
   final String name;
+  final DateTime selectedDate;
   var onChange;
 
   DateSelector({
     super.key,
     required this.name,
+    required this.selectedDate,
     required this.onChange,
   });
 
@@ -16,7 +18,7 @@ class DateSelector extends StatefulWidget {
 }
 
 class _DateSelectorState extends State<DateSelector> {
-  DateTime selectedDate = DateTime.now();
+  // DateTime selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,17 +34,17 @@ class _DateSelectorState extends State<DateSelector> {
               onTap: () async {
                 DateTime? newDate = await showDatePicker(
                   context: context,
-                  initialDate: selectedDate,
+                  initialDate: widget.selectedDate,
                   firstDate: DateTime(1900),
                   lastDate: DateTime(2100),
                 );
 
                 if (newDate != null) {
-                  setState(() {
-                    selectedDate = newDate;
-                  });
+                  // setState(() {
+                  //   selectedDate = newDate;
+                  // });
 
-                  widget.onChange = newDate;
+                  widget.onChange(newDate);
                 }
               },
               child: Container(
@@ -59,7 +61,7 @@ class _DateSelectorState extends State<DateSelector> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
+                        '${widget.selectedDate.year}-${widget.selectedDate.month}-${widget.selectedDate.day}',
                         style: const TextStyle(
                             color: Color(0xFF828282), fontSize: 16),
                       ),

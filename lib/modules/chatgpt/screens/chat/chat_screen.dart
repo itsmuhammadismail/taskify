@@ -4,6 +4,7 @@ import 'package:taskify/modules/chatgpt/screens/chat/models/messageModel.dart';
 import 'package:taskify/resources/colors.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 import 'package:taskify/shared/layout/widgets/layout.dart';
+import 'package:taskify/shared/providers/chat_provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:openai_client/openai_client.dart';
 import 'package:openai_client/src/model/openai_chat/chat_message.dart';

@@ -39,7 +39,7 @@ dependencies:
   fl_chart: ^0.63.0
   syncfusion_flutter_calendar: ^22.1.39
   horizontal_calendar: ^1.1.2
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.2.2
   provider: ^6.0.5
   firebase_core: ^2.15.1
   firebase_auth: ^4.9.0
@@ -48,6 +48,7 @@ dependencies:
   openai_client: ^0.0.7
   http: ^0.13.4
   flutter_dotenv: ^5.1.0
+  google_sign_in: ^6.1.6
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taskify/shared/layout/widgets/layout.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 import 'package:taskify/shared/widgets/button.dart';
 import 'package:taskify/shared/widgets/text_field.dart';
 

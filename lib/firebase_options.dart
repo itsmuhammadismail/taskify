@@ -44,40 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCjZSlxBI3lXZ_0AJLEU94fvZF5qU-Ar_E',
-    appId: '1:270182217406:web:f3d6a61020b9fcc47cd0ef',
-    messagingSenderId: '270182217406',
-    projectId: 'taskify-11',
-    authDomain: 'taskify-11.firebaseapp.com',
-    storageBucket: 'taskify-11.appspot.com',
-    measurementId: 'G-Y27WW5JQM7',
+    apiKey: 'AIzaSyDXWl35TL4v7QBRON0L_pAT-DJilIuN_W0',
+    appId: '1:317286870569:web:e51241853488c8b08eb638',
+    messagingSenderId: '317286870569',
+    projectId: 'taskify-e8a61',
+    authDomain: 'taskify-e8a61.firebaseapp.com',
+    storageBucket: 'taskify-e8a61.appspot.com',
+    measurementId: 'G-5SPEG72N35',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA8vhjB7_-M0rSsulKTvvMNoUHPgl1RJ5s',
-    appId: '1:270182217406:android:b70af159cb0a9ef97cd0ef',
-    messagingSenderId: '270182217406',
-    projectId: 'taskify-11',
-    storageBucket: 'taskify-11.appspot.com',
+    apiKey: 'AIzaSyCrTPHK5XKfYANDZwObGOeWuT0hC9oMq10',
+    appId: '1:317286870569:android:ee707a34b41d373d8eb638',
+    messagingSenderId: '317286870569',
+    projectId: 'taskify-e8a61',
+    storageBucket: 'taskify-e8a61.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA7sPZyFyK86WG1TJX-KjfIJRkcPsHE6CY',
-    appId: '1:270182217406:ios:575b04e26ba265547cd0ef',
-    messagingSenderId: '270182217406',
-    projectId: 'taskify-11',
-    storageBucket: 'taskify-11.appspot.com',
-    iosClientId: '270182217406-lrn4b22lm62eugq5k02vvhfbnipp1300.apps.googleusercontent.com',
+    apiKey: 'AIzaSyC5rhnMGyWjmIM4Y4dojDr2Urx9vsuS4II',
+    appId: '1:317286870569:ios:be7980894c61658d8eb638',
+    messagingSenderId: '317286870569',
+    projectId: 'taskify-e8a61',
+    storageBucket: 'taskify-e8a61.appspot.com',
     iosBundleId: 'com.example.taskify',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA7sPZyFyK86WG1TJX-KjfIJRkcPsHE6CY',
-    appId: '1:270182217406:ios:fabd3ae7b15a09267cd0ef',
-    messagingSenderId: '270182217406',
-    projectId: 'taskify-11',
-    storageBucket: 'taskify-11.appspot.com',
-    iosClientId: '270182217406-ac7538n997b90iv7mjd6o0kempob1n4h.apps.googleusercontent.com',
+    apiKey: 'AIzaSyC5rhnMGyWjmIM4Y4dojDr2Urx9vsuS4II',
+    appId: '1:317286870569:ios:d0fae6de3c0ba7358eb638',
+    messagingSenderId: '317286870569',
+    projectId: 'taskify-e8a61',
+    storageBucket: 'taskify-e8a61.appspot.com',
     iosBundleId: 'com.example.taskify.RunnerTests',
   );
 }

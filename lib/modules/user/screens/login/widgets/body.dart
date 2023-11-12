@@ -41,7 +41,8 @@ class Body extends HookWidget {
                 gender: res['gender'],
                 university: res['university'],
                 mobile: res['mobile'],
-                country: res['country']);
+                country: res['country'],
+                password: res['password']);
 
             Navigate.next(context, HomeScreen.id);
           } on FirebaseAuthException catch (e) {
@@ -109,6 +110,49 @@ class Body extends HookWidget {
                           )
                         : Text("Login"),
                     onPressed: () => _onSubmit(),
+                  ),
+                  const SizedBox(height: 20),
+                  Text("or signup using"),
+                  const SizedBox(height: 20),
+                  InkWell(
+                    child: Image.asset('assets/images/google.png'),
+                    onTap: () async {
+                      var data = await Auth().signInWithGoogle();
+                      print("dshgd");
+                      print(data.user);
+
+                      try {
+                        var res = await NetworkHelper.request(
+                          url: '/users/',
+                          method: 'POST',
+                          data: {
+                            "first_name": data.user.displayName.split(' ')[0],
+                            "last_name": data.user.displayName.split(' ')[1],
+                            "email": data.user.email,
+                            "password": "",
+                            "dob": "2023-11-06",
+                            "gender": "",
+                            "university": "",
+                            "mobile": "",
+                            "country": ""
+                          },
+                        );
+
+                        userProvider.user = UserInterface(
+                            id: res['id'],
+                            first_name: res['first_name'],
+                            last_name: res['last_name'],
+                            email: res['email'],
+                            dob: res['dob'],
+                            gender: res['gender'],
+                            university: res['university'],
+                            mobile: res['mobile'],
+                            country: res['country'],
+                            password: res['password']);
+
+                        Navigate.next(context, HomeScreen.id);
+                      } catch (e) {}
+                    },
                   ),
                   const SizedBox(height: 20),
                   Spacer(),

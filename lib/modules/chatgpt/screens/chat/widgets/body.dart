@@ -40,6 +40,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
+    var messages = Provider.of<ChatProvider>(context);
 
     void chatComplete() async {
       if (messageController.text != '') {
@@ -48,24 +49,36 @@ class _BodyState extends State<Body> {
         messageController.text = '';
 
         setState(() {
-          mymessages.insert(
-              0,
-              MessageModel(
-                text: text,
-                messageid: uuid.v1(),
-                sender: '2',
-                createdon: DateTime.now(),
-              ));
+          // mymessages.insert(
+          //     0,
+          //     MessageModel(
+          //       text: text,
+          //       messageid: uuid.v1(),
+          //       sender: '2',
+          //       createdon: DateTime.now(),
+          //     ));
+          messages.addChat(MessageModel(
+            text: text,
+            messageid: uuid.v1(),
+            sender: '2',
+            createdon: DateTime.now(),
+          ));
         });
         setState(() {
-          mymessages.insert(
-              0,
-              MessageModel(
-                text: "• • •",
-                messageid: uuid.v1(),
-                sender: '1',
-                createdon: DateTime.now(),
-              ));
+          // mymessages.insert(
+          //     0,
+          //     MessageModel(
+          //       text: "• • •",
+          //       messageid: uuid.v1(),
+          //       sender: '1',
+          //       createdon: DateTime.now(),
+          //     ));
+          messages.addChat(MessageModel(
+            text: '• • •',
+            messageid: uuid.v1(),
+            sender: '1',
+            createdon: DateTime.now(),
+          ));
         });
 
         final chat = await client.chat.create(
@@ -79,12 +92,18 @@ class _BodyState extends State<Body> {
         ).data;
 
         setState(() {
-          mymessages[0] = MessageModel(
+          // mymessages[0] = MessageModel(
+          //   text: chat.choices[0].message.content,
+          //   messageid: uuid.v1(),
+          //   sender: '1',
+          //   createdon: DateTime.now(),
+          // );
+          messages.updateFirst(MessageModel(
             text: chat.choices[0].message.content,
             messageid: uuid.v1(),
             sender: '1',
             createdon: DateTime.now(),
-          );
+          ));
         });
 
         print(chat.choices[0].message.content);
@@ -100,12 +119,13 @@ class _BodyState extends State<Body> {
               padding: const EdgeInsets.all(10),
               child: ListView.builder(
                   reverse: true,
-                  itemCount: mymessages.length,
+                  itemCount: messages.chat.length,
                   itemBuilder: (context, index) {
                     return Row(
-                      mainAxisAlignment: (mymessages[index].sender == id)
-                          ? MainAxisAlignment.end
-                          : MainAxisAlignment.start,
+                      mainAxisAlignment:
+                          (messages.chat[index].message.sender == id)
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
                       children: [
                         Container(
                             constraints:
@@ -118,13 +138,13 @@ class _BodyState extends State<Body> {
                               horizontal: 10,
                             ),
                             decoration: BoxDecoration(
-                              color: (mymessages[index].sender == id)
+                              color: (messages.chat[index].message.sender == id)
                                   ? Colors.grey
                                   : kPrimaryColor,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
-                              mymessages[index].text.toString(),
+                              messages.chat[index].message.text.toString(),
                               style: TextStyle(
                                 color: Colors.white,
                               ),

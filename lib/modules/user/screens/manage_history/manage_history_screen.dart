@@ -11,6 +11,8 @@ import 'package:taskify/resources/colors.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 import 'package:taskify/shared/layout/widgets/layout.dart';
 import 'package:taskify/modules/user/screens/account/account_screen.dart';
+import 'package:taskify/shared/network/network.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 import 'package:taskify/shared/routes/navigate.dart';
 import 'package:taskify/shared/widgets/button.dart';
 

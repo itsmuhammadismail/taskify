@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:taskify/shared/network/network.dart';
+import 'package:taskify/shared/providers/user_provider.dart';
 
 /// The hove page which hosts the calendar
 class MyCalender extends StatefulWidget {
@@ -12,15 +15,49 @@ class MyCalender extends StatefulWidget {
 }
 
 class _MyCalenderState extends State<MyCalender> {
+  List<Meeting> meetings = [];
+
+  _getDataSource() async {
+    final List<Meeting> newMeetings = <Meeting>[];
+
+    String id = context.read<UserProvider>().user.id;
+    try {
+      var res = await NetworkHelper.request(
+        url: '/tasks_history/?id=$id',
+      );
+
+      res.forEach((item) {
+        newMeetings.add(Meeting(
+            item['task_desc'],
+            DateTime.parse(item['start_time']),
+            DateTime.parse(item['end_time']),
+            const Color(0xFF69B9F2),
+            false));
+      });
+    } catch (e) {
+      print(e);
+    }
+
+    setState(() {
+      meetings = newMeetings;
+    });
+  }
+
+  @override
+  void initState() {
+    _getDataSource();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: size.height - 170,
+      height: size.height - 200,
       child: SfCalendar(
         view: CalendarView.schedule,
-        dataSource: MeetingDataSource(_getDataSource()),
+        dataSource: MeetingDataSource(meetings),
         // by default the month appointment display mode set as Indicator, we can
         // change the display mode as appointment using the appointment display
         // mode property
@@ -28,22 +65,6 @@ class _MyCalenderState extends State<MyCalender> {
             appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
       ),
     );
-  }
-
-  List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFF69B9F2), false));
-    meetings.add(Meeting(
-        'YouTube Tutorial',
-        DateTime(today.year, today.month, 20),
-        DateTime(today.year, today.month, 20),
-        const Color(0xFF69B9F2),
-        false));
-    return meetings;
   }
 }
 

@@ -9,11 +9,31 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   bool showHistory = false;
+  List<String> historyItems = [];
 
   void setShowHistory() {
-    setState(() {
-      showHistory = true;
-    });
+    getHistory();
+  }
+
+  void getHistory() async {
+    String id = context.read<UserProvider>().user.id;
+    try {
+      var res = await NetworkHelper.request(
+        url: '/tasks_history/?id=$id',
+      );
+
+      List<String> data = [];
+      res.forEach((item) {
+        data.add(item['task_desc']);
+      });
+
+      setState(() {
+        showHistory = true;
+        historyItems = data;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -45,61 +65,23 @@ class _BodyState extends State<Body> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: showHistory
                       ? [
-                          SizedBox(height: 20),
-                          Text(
-                            "Logistic company branding",
-                            style: TextStyle(
-                              color: themeChange.darkTheme
-                                  ? Colors.white
-                                  : Color(0xFF0821A1),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "YouTube Tutorial",
-                            style: TextStyle(
-                              color: themeChange.darkTheme
-                                  ? Colors.white
-                                  : Color(0xFF0821A1),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "Create identity",
-                            style: TextStyle(
-                              color: themeChange.darkTheme
-                                  ? Colors.white
-                                  : Color(0xFF0821A1),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "Briefing with South Korea ",
-                            style: TextStyle(
-                              color: themeChange.darkTheme
-                                  ? Colors.white
-                                  : Color(0xFF0821A1),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "Medical Landing page",
-                            style: TextStyle(
-                              color: themeChange.darkTheme
-                                  ? Colors.white
-                                  : Color(0xFF0821A1),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
+                          ...historyItems
+                              .map((item) => Column(
+                                    children: [
+                                      SizedBox(height: 20),
+                                      Text(
+                                        item,
+                                        style: TextStyle(
+                                          color: themeChange.darkTheme
+                                              ? Colors.white
+                                              : Color(0xFF0821A1),
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ))
+                              .toList(),
                         ]
                       : [
                           const Text("Your Data is safe with us!"),

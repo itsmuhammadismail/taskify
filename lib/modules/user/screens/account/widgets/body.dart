@@ -5,7 +5,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var user = Auth().currentUser;
+    var user = context.read<UserProvider>().user;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              title: Text(user?.displayName?.split(" ")[0] ?? ''),
+              title: Text('${user.first_name} ${user.last_name}'),
               leading: const Text("Name"),
             ),
           ),
@@ -32,7 +32,7 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              title: Text(user?.email ?? ''),
+              title: Text(user.email),
               leading: const Text("Email"),
             ),
           ),
@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              title: const Text("12 20 2000"),
+              title: Text(user.dob.split('T')[0] ?? ''),
               leading: const Text("Date of Birth"),
             ),
           ),
@@ -56,23 +56,23 @@ class Body extends StatelessWidget {
           Material(
             elevation: 2,
             child: ListTile(
-              title: const Text("Female"),
+              title: Text(user.gender),
               leading: const Text("Gender"),
             ),
           ),
           const SizedBox(height: 30),
+          // SizedBox(
+          //   width: double.infinity,
+          //   child: ElevatedButton(
+          //     child: Text("Add another Account"),
+          //     onPressed: () => Navigate.to(context, AddAccountScreen.id),
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              child: Text("Add another Account"),
-              onPressed: () => Navigate.to(context, AddAccountScreen.id),
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              child: Text("Remove an Account"),
+              child: Text("Remove Account"),
               onPressed: () => Navigate.to(context, RemoveAccountScreen.id),
             ),
           ),
