@@ -300,12 +300,15 @@ class CreatedTask extends StatelessWidget {
               color: themeChange.darkTheme
                   ? Colors.grey.shade800
                   : Color(0xFFD9D9D9),
-              borderRadius: BorderRadius.all(Radius.circular(12))),
+              borderRadius: const BorderRadius.all(Radius.circular(12))),
           child: Row(
             children: [
-              Text(
-                desc,
-                style: TextStyle(fontSize: 16),
+              Container(
+                constraints: BoxConstraints(maxWidth: 180),
+                child: Text(
+                  desc,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
               const Spacer(),
               Container(

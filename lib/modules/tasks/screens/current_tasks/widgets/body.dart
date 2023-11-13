@@ -22,8 +22,6 @@ class _BodyState extends State<Body> {
       method: 'GET',
     );
 
-    print("get tasks");
-    print(res);
     setState(() {
       tasks = res
           .map<Task>((task) => Task(
@@ -34,31 +32,29 @@ class _BodyState extends State<Body> {
           .toList();
       isTodoTasksLoading = false;
     });
+
+    context.read<TodoTaskProvider>().updateTodoTasks(tasks);
   }
 
   void getRunningTasks() async {
     String id = Provider.of<UserProvider>(context, listen: false).user.id;
-    try {
-      var res = await NetworkHelper.request(
-        url: '/tasks/started/?id=$id',
-        method: 'GET',
-      );
 
-      print("get running tasks");
-      print(res);
-      setState(() {
-        runningtasks = res
-            .map<Task>((task) => Task(
-                id: task['id'],
-                desc: task['desc'],
-                due_date: task['due_date'],
-                status: task['status']))
-            .toList();
-        isRunningTasksLoading = false;
-      });
-    } catch (e) {
-      print(e);
-    }
+    var res = await NetworkHelper.request(
+      url: '/tasks/started/?id=$id',
+      method: 'GET',
+    );
+
+    setState(() {
+      runningtasks = res
+          .map<Task>((task) => Task(
+              id: task['id'],
+              desc: task['desc'],
+              due_date: task['due_date'],
+              status: task['status']))
+          .toList();
+      isRunningTasksLoading = false;
+    });
+    context.read<RunningTaskProvider>().updateRunningTasks(runningtasks);
   }
 
   void startTask(String taskId) async {
@@ -71,8 +67,6 @@ class _BodyState extends State<Body> {
           "task": taskId,
         });
 
-    print("start tasks");
-    print(res);
     getTasks();
     getRunningTasks();
   }
@@ -83,8 +77,6 @@ class _BodyState extends State<Body> {
       method: 'PUT',
     );
 
-    print("complete tasks");
-    print(res);
     getTasks();
     getRunningTasks();
   }
@@ -116,6 +108,8 @@ class _BodyState extends State<Body> {
               const Center(
                 child: CircularProgressIndicator(),
               )
+            else if (runningtasks.length == 0)
+              Text('No running tasks')
             else
               ...runningtasks
                   .map((task) =>
@@ -134,6 +128,8 @@ class _BodyState extends State<Body> {
               const Center(
                 child: CircularProgressIndicator(),
               )
+            else if (tasks.length == 0)
+              Text('No tasks to do')
             else
               ...tasks
                   .map((task) => TodoTask(task: task, onStart: startTask))

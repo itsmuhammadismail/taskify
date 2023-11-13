@@ -22,3 +22,5 @@ const kGray500 = Color(0xFF9E9E9E);
 const kDisabledColor = Color(0xFF232323);
 const kTextFieldColor = Color(0xFFF3F2F2);
 const kBackgroundColor = Color(0xFF2F2F7E);
+
+const kHomeCardColor = Color(0xFFFFFFB5);

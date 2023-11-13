@@ -21,7 +21,7 @@ class _HeroSectionState extends State<HeroSection> {
     String id = context.read<UserProvider>().user.id;
     try {
       var res = await NetworkHelper.request(
-        url: '/tasks_history/?id=$id',
+        url: '/tasks?id=$id',
       );
 
       setState(() {
