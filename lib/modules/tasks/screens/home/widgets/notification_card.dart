@@ -38,18 +38,20 @@ class NotificationCard extends HookWidget {
       String text =
           'These are the task I need to do ```${myTodoTasks.toString()}``` and these are the task which I am currently working on ```${myRunningTasks.toString()}```. Please suggest the task from my todo task which I can do in parellel with my currently running tasks';
 
-      final chat = await client.chat.create(
-        model: 'gpt-3.5-turbo',
-        messages: [
-          ChatMessage(
-            role: 'user',
-            content: text,
-          )
-        ],
-      ).data;
+      try {
+        final chat = await client.chat.create(
+          model: 'gpt-3.5-turbo',
+          messages: [
+            ChatMessage(
+              role: 'user',
+              content: text,
+            )
+          ],
+        ).data;
 
-      // print(chat.choices[0].message.content);
-      suggestion.value = chat.choices[0].message.content;
+        // print(chat.choices[0].message.content);
+        suggestion.value = chat.choices[0].message.content;
+      } catch (e) {}
     }
 
     useEffect(() {

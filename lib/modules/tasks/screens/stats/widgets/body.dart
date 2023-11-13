@@ -6,6 +6,63 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var tasks = context.watch<RunningTaskProvider>().runningTasks;
+
+    getBars() {
+      List<Widget> bars = [];
+      for (int i = 0; i < tasks.length; i++) {
+        if (i % 2 == 0) {
+          bars.add(Align(
+            alignment: Alignment.topRight,
+            child: Column(
+              children: [
+                Container(
+                  width: size.width * 70 / 100,
+                  padding: const EdgeInsets.all(18),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    color: Color(0xFF9A5E9A),
+                  ),
+                  child: Text(
+                    tasks[i].task.desc,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          ));
+        } else {
+          bars.add(Align(
+            alignment: Alignment.topLeft,
+            child: Column(
+              children: [
+                Container(
+                  width: size.width * 70 / 100,
+                  padding: const EdgeInsets.all(18),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    color: Color(0xFF69B9F6),
+                  ),
+                  child: Text(
+                    tasks[i].task.desc,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          ));
+        }
+      }
+      return bars;
+    }
 
     return SizedBox(
       height: size.height,
@@ -30,16 +87,33 @@ class Body extends StatelessWidget {
               child: MyLineChart(),
             ),
             SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Text(
-                "No tasks",
-                style: TextStyle(
-                    fontSize: 31,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF236CD9)),
+            if (tasks.length == 0)
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Text(
+                  "No tasks",
+                  style: TextStyle(
+                      fontSize: 31,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF236CD9)),
+                ),
+              )
+            else
+              Column(
+                children: tasks
+                    .map((task) => Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Text(
+                            task.task.desc,
+                            style: TextStyle(
+                                fontSize: 31,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF236CD9)),
+                          ),
+                        ))
+                    .toList(),
               ),
-            ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -60,45 +134,46 @@ class Body extends StatelessWidget {
                   end: Alignment.bottomCenter,
                 )),
                 child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        width: size.width * 70 / 100,
-                        padding: const EdgeInsets.all(18),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          ),
-                          color: Color(0xFF9A5E9A),
-                        ),
-                        child: const Text(
-                          "",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        width: size.width * 70 / 100,
-                        padding: const EdgeInsets.all(18),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                          ),
-                          color: Color(0xFF69B9F6),
-                        ),
-                        child: const Text(
-                          "",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    )
-                  ],
+                  children: getBars(),
+                  //   [
+                  //   Align(
+                  //     alignment: Alignment.topRight,
+                  //     child: Container(
+                  //       width: size.width * 70 / 100,
+                  //       padding: const EdgeInsets.all(18),
+                  //       decoration: const BoxDecoration(
+                  //         borderRadius: BorderRadius.only(
+                  //           topLeft: Radius.circular(10),
+                  //           bottomLeft: Radius.circular(10),
+                  //         ),
+                  //         color: Color(0xFF9A5E9A),
+                  //       ),
+                  //       child: const Text(
+                  //         "",
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   const SizedBox(height: 10),
+                  //   Align(
+                  //     alignment: Alignment.topLeft,
+                  //     child: Container(
+                  //       width: size.width * 70 / 100,
+                  //       padding: const EdgeInsets.all(18),
+                  //       decoration: const BoxDecoration(
+                  //         borderRadius: BorderRadius.only(
+                  //           topRight: Radius.circular(10),
+                  //           bottomRight: Radius.circular(10),
+                  //         ),
+                  //         color: Color(0xFF69B9F6),
+                  //       ),
+                  //       child: const Text(
+                  //         "",
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //   )
+                  // ],
                 )),
           ],
         ),
