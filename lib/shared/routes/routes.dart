@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskify/modules/chatgpt/screens/chat/chat_screen.dart';
 import 'package:taskify/modules/tasks/screens/add_task/add_task_screen.dart';
 import 'package:taskify/modules/tasks/screens/create/create_screen.dart';
+import 'package:taskify/modules/tasks/screens/current_tasks/current_tasks_screen.dart';
 import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
 import 'package:taskify/modules/tasks/screens/stats/stats_screen.dart';
 import 'package:taskify/modules/user/screens/about/about_screen.dart';
@@ -58,5 +59,6 @@ class Routes {
     RemoveAccountScreen.id: (context) => const RemoveAccountScreen(),
     AddAccountScreen.id: (context) => const AddAccountScreen(),
     ChatScreen.id: (context) => const ChatScreen(),
+    CurrentTasksScreen.id: (context) => const CurrentTasksScreen(),
   };
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskify/modules/tasks/screens/add_task/add_task_screen.dart';
+import 'package:taskify/modules/tasks/screens/home/home_screen.dart';
 import 'package:taskify/modules/tasks/screens/stats/stats_screen.dart';
 import 'package:taskify/modules/user/screens/edit_profile/edit_profile_screen.dart';
 import 'package:taskify/modules/user/screens/history/history_screen.dart';
@@ -61,13 +62,19 @@ class _BuildAppBarState extends State<BuildAppBar> {
       backgroundColor: themeChange.darkTheme ? Colors.black : Colors.white,
       elevation: 0,
       title: themeChange.darkTheme
-          ? Image.asset(
-              'assets/logos/logo-dark.png',
-              width: 75,
+          ? InkWell(
+              onTap: () => Navigate.to(context, HomeScreen.id),
+              child: Image.asset(
+                'assets/logos/logo-dark.png',
+                width: 75,
+              ),
             )
-          : Image.asset(
-              'assets/logos/taskify-text.png',
-              width: 75,
+          : InkWell(
+              onTap: () => Navigate.to(context, HomeScreen.id),
+              child: Image.asset(
+                'assets/logos/taskify-text.png',
+                width: 75,
+              ),
             ),
       actions: [
         Padding(
