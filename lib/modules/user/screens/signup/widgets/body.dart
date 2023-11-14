@@ -9,6 +9,7 @@ class Body extends HookWidget {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final themeChange = Provider.of<DarkThemeProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
+    final credentialsProvider = Provider.of<CredentialsProvider>(context);
 
     final loading = useState<bool>(false);
 
@@ -76,6 +77,11 @@ class Body extends HookWidget {
                   mobile: res['mobile'],
                   country: res['country'],
                   password: res['password']);
+
+              credentialsProvider.credentials = CredentialsInterface(
+                email: _emailController.text,
+                password: _passwordController.text,
+              );
 
               Navigate.next(context, HomeScreen.id);
             } on FirebaseAuthException catch (e) {

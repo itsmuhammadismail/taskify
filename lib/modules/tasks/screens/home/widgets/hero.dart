@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:taskify/auth.dart';
 import 'package:taskify/shared/network/network.dart';
+import 'package:taskify/shared/providers/todo_tasks_provider.dart';
 import 'package:taskify/shared/providers/user_provider.dart';
 
 class HeroSection extends StatefulWidget {
@@ -15,32 +16,10 @@ class HeroSection extends StatefulWidget {
 }
 
 class _HeroSectionState extends State<HeroSection> {
-  int tasks = 0;
-
-  void getHistory() async {
-    String id = context.read<UserProvider>().user.id;
-    try {
-      var res = await NetworkHelper.request(
-        url: '/tasks?id=$id',
-      );
-
-      setState(() {
-        tasks = res.length;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  @override
-  void initState() {
-    getHistory();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     String name = Provider.of<UserProvider>(context).user.first_name;
+    int tasks = Provider.of<TodoTaskProvider>(context).todoTasks.length;
 
     return Row(
       children: [

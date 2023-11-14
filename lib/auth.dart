@@ -42,4 +42,8 @@ class Auth {
 
     return await _firebaseAuth.signInWithCredential(credential);
   }
+
+  sendPasswordResetEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }

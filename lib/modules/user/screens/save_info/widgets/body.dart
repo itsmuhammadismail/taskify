@@ -12,6 +12,8 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    final credentialsProvider = Provider.of<CredentialsProvider>(context);
+
     void setSaveInfo(bool save) async {
       setState(() {
         saveInfo = save;
@@ -19,6 +21,7 @@ class _BodyState extends State<Body> {
       try {
         await Auth().signOut();
       } catch (e) {}
+      Provider.of<CredentialsProvider>(context, listen: false).isSave(save);
       Provider.of<UserProvider>(context, listen: false).clearUser();
 
       Timer(const Duration(seconds: 2),

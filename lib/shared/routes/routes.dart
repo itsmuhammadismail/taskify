@@ -12,6 +12,7 @@ import 'package:taskify/modules/user/screens/app_security/app_security_screen.da
 import 'package:taskify/modules/user/screens/appearance/appearance_screen.dart';
 import 'package:taskify/modules/user/screens/edit_profile/edit_profile_screen.dart';
 import 'package:taskify/modules/user/screens/forget_password/forget_password_screen.dart';
+import 'package:taskify/modules/user/screens/forget_password_email/forget_password_email_screen.dart';
 import 'package:taskify/modules/user/screens/help_and_support/help_and_support_screen.dart';
 import 'package:taskify/modules/user/screens/history/history_screen.dart';
 import 'package:taskify/modules/user/screens/login/login_screen.dart';
@@ -34,6 +35,7 @@ class Routes {
     SplashScreen.id: (context) => const SplashScreen(),
     LoginScreen.id: (context) => const LoginScreen(),
     ForgetPasswordScreen.id: (context) => const ForgetPasswordScreen(),
+    ForgetPasswordEmailScreen.id: (context) => const ForgetPasswordEmailScreen(),
     SignupScreen.id: (context) => const SignupScreen(),
     HomeScreen.id: (context) => const HomeScreen(),
     SettingsScreen.id: (context) => const SettingsScreen(),

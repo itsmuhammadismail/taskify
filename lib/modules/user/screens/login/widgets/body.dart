@@ -8,12 +8,20 @@ class Body extends HookWidget {
     Size size = MediaQuery.of(context).size;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final userProvider = Provider.of<UserProvider>(context);
+    final credentialsProvider = Provider.of<CredentialsProvider>(context);
 
     final loading = useState<bool>(false);
 
     final _emailController = TextEditingController();
     final _passwordController = TextEditingController();
 
+    useEffect(() {
+      if (credentialsProvider.credentials.save) {
+        _emailController.text = credentialsProvider.credentials.email;
+        _passwordController.text = credentialsProvider.credentials.password;
+      }
+    },[credentialsProvider.credentials.save]);
+    
     void _onSubmit() async {
       final form = _formKey.currentState;
 
@@ -43,6 +51,11 @@ class Body extends HookWidget {
                 mobile: res['mobile'],
                 country: res['country'],
                 password: res['password']);
+
+            credentialsProvider.credentials = CredentialsInterface(
+              email: _emailController.text,
+              password: _passwordController.text,
+            );
 
             Navigate.next(context, HomeScreen.id);
           } on FirebaseAuthException catch (e) {
@@ -96,7 +109,7 @@ class Body extends HookWidget {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () =>
-                            Navigate.to(context, ForgetPasswordScreen.id),
+                            Navigate.to(context, ForgetPasswordEmailScreen.id),
                         child: const Text("Forget Password?",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
