@@ -20,6 +20,7 @@ class RunningTaskInterface {
       task: Task(
         desc: jsonData['desc'],
         due_date: jsonData['due_date'],
+        updated_at: jsonData['updated_at'],
         id: jsonData['id'],
         status: jsonData['status'],
       ),
@@ -39,6 +40,7 @@ class RunningTaskInterface {
       "id": task.id,
       "status": task.status,
       "due_date": task.due_date,
+      "updated_at": task.updated_at
     };
   }
 
@@ -75,6 +77,7 @@ class RunningTaskProvider with ChangeNotifier {
                 id: task['id'],
                 desc: task['desc'],
                 due_date: task['due_date'],
+                updated_at: task['updated_at'],
                 status: task['status'])))
         .toList();
 

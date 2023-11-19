@@ -20,6 +20,7 @@ class TodoTaskInterface {
       task: Task(
         desc: jsonData['desc'],
         due_date: jsonData['due_date'],
+        updated_at: jsonData['updated_at'],
         id: jsonData['id'],
         status: jsonData['status'],
       ),
@@ -39,6 +40,7 @@ class TodoTaskInterface {
       "id": task.id,
       "status": task.status,
       "due_date": task.due_date,
+      "updated_at": task.updated_at,
     };
   }
 
@@ -70,12 +72,17 @@ class TodoTaskProvider with ChangeNotifier {
     );
 
     var todotasks = res
-        .map<TodoTaskInterface>((task) => TodoTaskInterface(
+        .map<TodoTaskInterface>(
+          (task) => TodoTaskInterface(
             task: Task(
-                id: task['id'],
-                desc: task['desc'],
-                due_date: task['due_date'],
-                status: task['status'])))
+              id: task['id'],
+              desc: task['desc'],
+              due_date: task['due_date'],
+              updated_at: task['updated_at'],
+              status: task['status'],
+            ),
+          ),
+        )
         .toList();
 
     _todoTasks = todotasks;
@@ -83,8 +90,7 @@ class TodoTaskProvider with ChangeNotifier {
   }
 
   updateTodoTasks(List<Task> tasks) {
-    var newTasks =
-        tasks.map((task) => TodoTaskInterface(task: task)).toList();
+    var newTasks = tasks.map((task) => TodoTaskInterface(task: task)).toList();
     _todoTasks = newTasks;
     notifyListeners();
   }

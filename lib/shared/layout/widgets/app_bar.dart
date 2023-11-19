@@ -11,8 +11,6 @@ import 'package:taskify/modules/user/screens/settings/settings_screen.dart';
 import 'package:taskify/modules/user/screens/show_details/show_details_screen.dart';
 import 'package:taskify/shared/dark_theme/dark_theme_provider.dart';
 import 'package:taskify/shared/routes/navigate.dart';
-import 'package:taskify/shared/widgets/alert.dart';
-import 'package:taskify/shared/widgets/text.dart';
 
 class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
   const BuildAppBar({
@@ -23,7 +21,6 @@ class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<BuildAppBar> createState() => _BuildAppBarState();
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
@@ -33,9 +30,6 @@ class _BuildAppBarState extends State<BuildAppBar> {
     final themeChange = Provider.of<DarkThemeProvider>(context);
 
     Future<void> onLogout() async {
-      // context.read<UserCubit>().logout();
-      // await HydratedBlocOverrides.current?.storage.clear();
-
       return showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -56,8 +50,10 @@ class _BuildAppBarState extends State<BuildAppBar> {
     }
 
     return AppBar(
-      iconTheme: const IconThemeData(
-        color: Colors.black, //change your color here
+      iconTheme: IconThemeData(
+        color: themeChange.darkTheme
+            ? Colors.white
+            : Colors.black, //change your color here
       ),
       backgroundColor: themeChange.darkTheme ? Colors.black : Colors.white,
       elevation: 0,

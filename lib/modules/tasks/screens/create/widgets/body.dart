@@ -1,13 +1,15 @@
 part of "../create_screen.dart";
 
 class Task {
-  String id, desc, due_date, status;
+  String id, desc, due_date, updated_at, status;
 
-  Task(
-      {required this.id,
-      required this.desc,
-      required this.due_date,
-      required this.status});
+  Task({
+    required this.id,
+    required this.desc,
+    required this.due_date,
+    required this.updated_at,
+    required this.status,
+  });
 }
 
 class Body extends StatefulWidget {
@@ -51,6 +53,7 @@ class _BodyState extends State<Body> {
               id: task['id'],
               desc: task['desc'],
               due_date: task['due_date'],
+              updated_at: task['updated_at'],
               status: task['status']))
           .toList();
     });

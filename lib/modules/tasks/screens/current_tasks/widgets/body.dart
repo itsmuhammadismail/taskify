@@ -28,6 +28,7 @@ class _BodyState extends State<Body> {
               id: task['id'],
               desc: task['desc'],
               due_date: task['due_date'],
+              updated_at: task['updated_at'],
               status: task['status']))
           .toList();
       isTodoTasksLoading = false;
@@ -50,6 +51,7 @@ class _BodyState extends State<Body> {
               id: task['id'],
               desc: task['desc'],
               due_date: task['due_date'],
+              updated_at: task['updated_at'],
               status: task['status']))
           .toList();
       isRunningTasksLoading = false;

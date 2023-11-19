@@ -16,7 +16,7 @@ class RunningTask extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Started at: ${task.due_date}'),
+        Text('Started at: ${task.updated_at}'),
         SizedBox(height: 5),
         ListTile(
           title: Text(task.desc),
