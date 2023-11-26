@@ -14,7 +14,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-
   List<DoneTaskInterface> tasks = [];
 
   void getHistory() async {
@@ -23,6 +22,7 @@ class _BodyState extends State<Body> {
       var res = await NetworkHelper.request(
         url: '/tasks_history/?id=$id',
       );
+      print(res.length);
 
       List<DoneTaskInterface> data = [];
       res.forEach((item) {

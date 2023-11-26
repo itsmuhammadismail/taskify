@@ -25,15 +25,20 @@ class _MyCalenderState extends State<MyCalender> {
       var res = await NetworkHelper.request(
         url: '/tasks_history/?id=$id',
       );
+      print(res[2]);
 
       res.forEach((item) {
-        newMeetings.add(Meeting(
-            item['task_desc'],
-            DateTime.parse(item['start_time']),
-            DateTime.parse(item['end_time']),
-            const Color(0xFF69B9F2),
-            false));
+        print(item['task_desc'].runtimeType);
+        if (item['end_time'] != null) {
+          newMeetings.add(Meeting(
+              item['task_desc'] ?? '',
+              DateTime.parse(item['start_time']),
+              DateTime.parse(item['end_time']),
+              const Color(0xFF69B9F2),
+              false));
+        }
       });
+     
     } catch (e) {
       print(e);
     }
