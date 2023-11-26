@@ -10,9 +10,11 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   List<Task> tasks = [];
   List<Task> runningtasks = [];
+  List<Task> recommendedtasks = [];
 
   bool isRunningTasksLoading = true;
   bool isTodoTasksLoading = true;
+  bool isRecommandedTasksLoading = true;
 
   void getTasks() async {
     String id = Provider.of<UserProvider>(context, listen: false).user.id;
@@ -35,6 +37,28 @@ class _BodyState extends State<Body> {
     });
 
     context.read<TodoTaskProvider>().updateTodoTasks(tasks);
+  }
+
+  void getRecommendedTasks() async {
+    String id = Provider.of<UserProvider>(context, listen: false).user.id;
+
+    var res = await NetworkHelper.request(
+      url: '/tasks/recommendation/$id',
+      method: 'GET',
+    );
+
+    setState(() {
+      recommendedtasks = [
+        Task(
+          id: res['id'],
+          desc: res['desc'],
+          due_date: res['due_date'],
+          updated_at: res['updated_at'],
+          status: res['status'],
+        )
+      ];
+      isRecommandedTasksLoading = false;
+    });
   }
 
   void getRunningTasks() async {
@@ -71,6 +95,7 @@ class _BodyState extends State<Body> {
 
     getTasks();
     getRunningTasks();
+    getRecommendedTasks();
   }
 
   void completeTask(String taskId) async {
@@ -81,12 +106,14 @@ class _BodyState extends State<Body> {
 
     getTasks();
     getRunningTasks();
+    getRecommendedTasks();
   }
 
   @override
   void initState() {
     getTasks();
     getRunningTasks();
+    getRecommendedTasks();
     super.initState();
   }
 
@@ -134,6 +161,24 @@ class _BodyState extends State<Body> {
               Text('No tasks to do')
             else
               ...tasks
+                  .map((task) => TodoTask(task: task, onStart: startTask))
+                  .toList(),
+            const Text(
+              "Recommended Tasks",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 20),
+            if (isRecommandedTasksLoading)
+              const Center(
+                child: CircularProgressIndicator(),
+              )
+            else if (tasks.length == 0)
+              Text('No tasks to recommend')
+            else
+              ...recommendedtasks
                   .map((task) => TodoTask(task: task, onStart: startTask))
                   .toList()
           ],
