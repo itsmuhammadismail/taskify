@@ -27,12 +27,12 @@ class TaskCompletedCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "We noticed that tomorrow you have a busy day, and today all the tasks have already been completed.",
+                  "Welcome Back",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Try to redistribute the load.",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  "The ultimate tool for planning and achieving your goals.",
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:taskify/modules/tasks/screens/create/create_screen.dart';
 import 'package:taskify/modules/tasks/screens/current_tasks/widgets/running_task.dart';
 import 'package:taskify/modules/tasks/screens/current_tasks/widgets/todo_task.dart';
+import 'package:taskify/notification_service.dart';
 import 'package:taskify/shared/layout/widgets/layout.dart';
 import 'package:taskify/shared/network/network.dart';
 import 'package:taskify/shared/providers/running_tasks_provider.dart';

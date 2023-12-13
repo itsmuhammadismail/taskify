@@ -16,7 +16,7 @@ class MyLineChart extends StatefulWidget {
 class _MyLineChartState extends State<MyLineChart> {
   List<FlSpot> spots = [];
   bool isLoading = true;
-  int maxX = 0;
+  double maxX = 0, maxY = 0;
 
   getGraphData() async {
     String id = context.read<UserProvider>().user.id;
@@ -31,6 +31,9 @@ class _MyLineChartState extends State<MyLineChart> {
     res['counts'].forEach((item) {
       print(item.toDouble());
       print(index);
+      if (item.toDouble() > maxY) {
+        maxY = item.toDouble();
+      }
       spots.add(FlSpot(index.toDouble(), item.toDouble()));
       index++;
     });
@@ -59,7 +62,7 @@ class _MyLineChartState extends State<MyLineChart> {
               minX: 0,
               maxX: maxX.toDouble(),
               minY: 0,
-              maxY: 5,
+              maxY: maxY.toDouble(),
               borderData: FlBorderData(border: const Border()),
               gridData: const FlGridData(show: false),
               titlesData: const FlTitlesData(

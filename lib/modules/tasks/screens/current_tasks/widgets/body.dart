@@ -48,15 +48,18 @@ class _BodyState extends State<Body> {
     );
 
     setState(() {
-      recommendedtasks = [
-        Task(
-          id: res['id'],
-          desc: res['desc'],
-          due_date: res['due_date'],
-          updated_at: res['updated_at'],
-          status: res['status'],
-        )
-      ];
+      if (res.length > 0) {
+        recommendedtasks = [
+          Task(
+            id: res['id'],
+            desc: res['desc'],
+            due_date: res['due_date'],
+            updated_at: res['updated_at'],
+            status: res['status'],
+          )
+        ];
+      }
+
       isRecommandedTasksLoading = false;
     });
   }
@@ -93,6 +96,7 @@ class _BodyState extends State<Body> {
           "task": taskId,
         });
 
+    NotificationService().showNotifications("Taskify", "Task has been started");
     getTasks();
     getRunningTasks();
     getRecommendedTasks();
@@ -104,6 +108,8 @@ class _BodyState extends State<Body> {
       method: 'PUT',
     );
 
+    NotificationService()
+        .showNotifications("Taskify", "Task has been completed");
     getTasks();
     getRunningTasks();
     getRecommendedTasks();
@@ -138,7 +144,12 @@ class _BodyState extends State<Body> {
                 child: CircularProgressIndicator(),
               )
             else if (runningtasks.length == 0)
-              Text('No running tasks')
+              Column(
+                children: [
+                  Text('No running tasks'),
+                  const SizedBox(height: 20),
+                ],
+              )
             else
               ...runningtasks
                   .map((task) =>
@@ -158,7 +169,12 @@ class _BodyState extends State<Body> {
                 child: CircularProgressIndicator(),
               )
             else if (tasks.length == 0)
-              Text('No tasks to do')
+              Column(
+                children: [
+                  Text('No tasks to do'),
+                  const SizedBox(height: 20),
+                ],
+              )
             else
               ...tasks
                   .map((task) => TodoTask(task: task, onStart: startTask))
@@ -176,7 +192,7 @@ class _BodyState extends State<Body> {
                 child: CircularProgressIndicator(),
               )
             else if (tasks.length == 0)
-              Text('No tasks to recommend')
+              const Text('No tasks to recommend')
             else
               ...recommendedtasks
                   .map((task) => TodoTask(task: task, onStart: startTask))

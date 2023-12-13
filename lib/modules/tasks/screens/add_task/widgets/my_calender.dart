@@ -32,13 +32,12 @@ class _MyCalenderState extends State<MyCalender> {
         if (item['end_time'] != null) {
           newMeetings.add(Meeting(
               item['task_desc'] ?? '',
-              DateTime.parse(item['start_time']),
-              DateTime.parse(item['end_time']),
+              DateTime.parse(item['start_time']).add(Duration(hours: 5)),
+              DateTime.parse(item['end_time']).add(Duration(hours: 5)),
               const Color(0xFF69B9F2),
               false));
         }
       });
-     
     } catch (e) {
       print(e);
     }

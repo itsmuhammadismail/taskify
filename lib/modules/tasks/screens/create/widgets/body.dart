@@ -89,6 +89,9 @@ class _BodyState extends State<Body> {
             "user": user.id.toString()
           },
         );
+
+        NotificationService().showNotifications(
+            "Taskify", "The task '${desc.toString()}' has been created");
       } catch (e) {
         print(e.toString());
       }
