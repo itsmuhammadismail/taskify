@@ -27,7 +27,9 @@ class _MyLineChartState extends State<MyLineChart> {
 
     print(res['counts']);
     int index = 1;
-    maxX = res['counts'].length;
+    print("count -> ");
+    print(res['counts'].length.toDouble());
+    maxX = res['counts'].length.toDouble();
     res['counts'].forEach((item) {
       print(item.toDouble());
       print(index);
@@ -37,6 +39,7 @@ class _MyLineChartState extends State<MyLineChart> {
       spots.add(FlSpot(index.toDouble(), item.toDouble()));
       index++;
     });
+    maxY = (maxY + 1).toDouble();
     isLoading = false;
     setState(() {});
   }
